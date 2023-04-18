@@ -16,10 +16,15 @@ import 'package:first_may/core/ui/widgets/base_bloc_listener.dart';
 import 'package:first_may/di/app_locator.dart';
 
 TextEditingController _summController = TextEditingController();
+FocusNode _focusNode = FocusNode();
+FocusNode _focusNode2 = FocusNode();
 
 @RoutePage()
-class TableScreen extends StatelessWidget implements AutoRouteWrapper {
+class TableScreen extends StatefulWidget implements AutoRouteWrapper {
   const TableScreen({super.key});
+
+  @override
+  State<TableScreen> createState() => _TableScreenState();
 
   @override
   Widget wrappedRoute(context) => BlocProvider(
@@ -28,9 +33,19 @@ class TableScreen extends StatelessWidget implements AutoRouteWrapper {
         ),
         child: this,
       );
+}
 
+class _TableScreenState extends State<TableScreen> {
   @override
   Widget build(BuildContext context) => BaseBlocListener<TableBloc, TableState>(
+        listener: (context, state, action) async {
+          if (action is ShowStatementDone) {
+            showStatementDoneDialog(context);
+          }
+          if (action is ShowEditingModal) {
+            showEditModal(context, state, action.index);
+          }
+        },
         child: ScreenWrapper(
           child: SafeArea(
             child: Scaffold(
@@ -42,26 +57,15 @@ class TableScreen extends StatelessWidget implements AutoRouteWrapper {
                   builder: (context, state) {
                     switch (state.currentStateWindow) {
                       case CurrentStateWindow.active:
-                        return RawKeyboardListener(
-                          focusNode: FocusNode(),
-                          autofocus: true,
-                          onKey: (event) {
-                            if (event.runtimeType == RawKeyDownEvent) {
-                              if (event.physicalKey == PhysicalKeyboardKey.enter) {
-                                context.sendEvent<TableBloc>(const TableEvent.switchCurrentStateWindow());
-                              }
-                            }
-                          },
-                          child: Column(
-                            children: [
-                              buildWinButtons(context),
-                              buildAppBar(context, state),
-                              Expanded(
-                                child: buildTable(),
-                              ),
-                              buildButtomButtons(context)
-                            ],
-                          ),
+                        return Column(
+                          children: [
+                            buildWinButtons(context),
+                            buildAppBar(context, state),
+                            Expanded(
+                              child: buildTable(),
+                            ),
+                            buildBottomButtons(context)
+                          ],
                         );
                       case CurrentStateWindow.minimize:
                         return buildButtonSwitch(context);
@@ -104,45 +108,68 @@ class TableScreen extends StatelessWidget implements AutoRouteWrapper {
   Widget buildAppBar(BuildContext context, TableState state) {
     return Row(
       children: [
-        const SizedBox(width: 20),
+        //const SizedBox(width: 5),
+        //buildAddNewPersonButton(context),
+        const SizedBox(width: 35),
         buildDropDown(state, context),
-        const SizedBox(width: 20),
-        buildAddNewPersonButton(context),
         const SizedBox(width: 20),
         buildTextFieldSumm(),
         const SizedBox(width: 20),
-        buildAddNewSaleButton(state, context),
+        buildAddNewSaleButton(context),
         const SizedBox(width: 20),
       ],
     );
   }
 
-  ElevatedButton buildAddNewSaleButton(TableState state, BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        if (state.selectedPerson != null && _summController.text.isNotEmpty) {
-          context.sendEvent<TableBloc>(
-            TableEvent.addNew(
-              Sell(
-                fullname: state.selectedPerson!,
-                summ: double.parse(_summController.text),
-                date: DateTime.now(),
-              ),
-            ),
-          );
-          _summController.clear();
-        }
+  Widget buildAddNewSaleButton(BuildContext context) {
+    return BlocBuilder<TableBloc, TableState>(
+      buildWhen: (previous, current) => previous.selectedPerson != current.selectedPerson,
+      builder: (context, state) {
+        return ElevatedButton(
+          onPressed: () {
+            if (state.selectedPerson != null && _summController.text.isNotEmpty) {
+              context.sendEvent<TableBloc>(
+                TableEvent.addNew(
+                  Sell(
+                    fullname: state.selectedPerson!.fullname,
+                    summ: double.parse(_summController.text),
+                    date: DateTime.now(),
+                  ),
+                ),
+              );
+              _summController.clear();
+            }
+          },
+          child: const Text('Ок'),
+        );
       },
-      child: const Text('Ок'),
     );
   }
 
   Widget buildTextFieldSumm() {
     return Expanded(
-      child: TextField(
-        controller: _summController,
-        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*\.?\d{0,2})'))],
-        decoration: const InputDecoration(hintText: 'Сумма'),
+      child: BlocBuilder<TableBloc, TableState>(
+        builder: (context, state) {
+          return TextField(
+            focusNode: _focusNode,
+            autofocus: false,
+            controller: _summController,
+            inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*\.?\d{0,2})'))],
+            decoration: const InputDecoration(hintText: 'Сумма'),
+            onEditingComplete: () {
+              context.sendEvent<TableBloc>(
+                TableEvent.addNew(
+                  Sell(
+                    fullname: state.selectedPerson!.fullname,
+                    summ: double.parse(_summController.text),
+                    date: DateTime.now(),
+                  ),
+                ),
+              );
+              _summController.clear();
+            },
+          );
+        },
       ),
     );
   }
@@ -164,7 +191,13 @@ class TableScreen extends StatelessWidget implements AutoRouteWrapper {
                   TextButton(
                     onPressed: () {
                       if (controller.text.isNotEmpty) {
-                        context.sendEvent<TableBloc>(TableEvent.addNewPerson(controller.text));
+                        context.sendEvent<TableBloc>(
+                          TableEvent.addNewPerson(
+                            Person(
+                              fullname: controller.text,
+                            ),
+                          ),
+                        );
                         Navigator.pop(context, true);
                       }
                     },
@@ -181,22 +214,38 @@ class TableScreen extends StatelessWidget implements AutoRouteWrapper {
   Widget buildDropDown(TableState state, BuildContext context) {
     return Expanded(
       flex: 2,
-      child: DropdownSearch<Person>(
-        popupProps: const PopupProps.menu(
-          showSearchBox: true,
+      child: Focus(
+        autofocus: true,
+        child: BlocBuilder<TableBloc, TableState>(
+          buildWhen: (previous, current) =>
+              previous.persons != current.persons || previous.selectedPerson != current.selectedPerson,
+          builder: (context, state) {
+            return DropdownSearch<Person>(
+              selectedItem: state.selectedPerson,
+              popupProps: const PopupProps.menu(
+                searchFieldProps: TextFieldProps(
+                  autofocus: true,
+                ),
+                showSearchBox: true,
+              ),
+              items: state.persons,
+              dropdownDecoratorProps: const DropDownDecoratorProps(
+                baseStyle: TextStyle(fontSize: 16),
+                dropdownSearchDecoration: InputDecoration(labelText: 'ФИО'),
+              ),
+              itemAsString: (Person u) => u.fullname,
+              onChanged: (Person? person) {
+                //FocusScope.of(context).requestFocus(FocusNode());
+
+                if (person != null) {
+                  context.sendEvent<TableBloc>(TableEvent.selectPerson(person));
+                }
+                _focusNode.requestFocus();
+                print(person?.fullname);
+              },
+            );
+          },
         ),
-        items: state.persons,
-        dropdownDecoratorProps: const DropDownDecoratorProps(
-          baseStyle: TextStyle(fontSize: 16),
-          dropdownSearchDecoration: InputDecoration(labelText: "ФИО"),
-        ),
-        itemAsString: (Person u) => u.fullname,
-        onChanged: (Person? data) {
-          if (data != null) {
-            context.sendEvent<TableBloc>(TableEvent.selectPerson(data.fullname));
-          }
-          print(data?.fullname);
-        },
       ),
     );
   }
@@ -215,6 +264,7 @@ class TableScreen extends StatelessWidget implements AutoRouteWrapper {
                   padding: const EdgeInsets.only(top: 10.0),
                   child: DataTableWidget(
                     people: state.sells,
+                    onPressedRow: (index) => context.sendEvent<TableBloc>(TableEvent.onLongPressRow(index)),
                   ),
                 ),
               ),
@@ -225,7 +275,7 @@ class TableScreen extends StatelessWidget implements AutoRouteWrapper {
     );
   }
 
-  Widget buildButtomButtons(BuildContext context) {
+  Widget buildBottomButtons(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -252,16 +302,100 @@ class TableScreen extends StatelessWidget implements AutoRouteWrapper {
     );
   }
 
-  showAlertDialog(BuildContext context) {
+  showStatementDoneDialog(BuildContext context) {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text('Файл сформирован'),
+      title: const Text('Файл сформирован'),
       actions: [
         TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           child: Text('Ок'),
+        ),
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showEditModal(BuildContext contextExternal, TableState state, int index) {
+    // set up the AlertDialog
+    TextEditingController summController = TextEditingController();
+    summController.text = state.sells[index].summ.toString();
+    Person? _person;
+    for (var item in state.persons) {
+      if (item.fullname == state.sells[index].fullname) {
+        _person = item;
+        break;
+      }
+    }
+    AlertDialog alert = AlertDialog(
+      title: const Text('Изменение данных по продаже'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          DropdownSearch<Person>(
+            selectedItem: _person,
+            popupProps: const PopupProps.menu(
+              searchFieldProps: TextFieldProps(
+                autofocus: true,
+              ),
+              showSearchBox: true,
+            ),
+            items: state.persons,
+            dropdownDecoratorProps: const DropDownDecoratorProps(
+              baseStyle: TextStyle(fontSize: 16),
+              dropdownSearchDecoration: InputDecoration(labelText: 'ФИО'),
+            ),
+            itemAsString: (Person u) => u.fullname,
+            onChanged: (Person? person) {
+              //FocusScope.of(context).requestFocus(FocusNode());
+
+              if (person != null) {
+                _person = person;
+              }
+              _focusNode2.requestFocus();
+              print(person?.fullname);
+            },
+          ),
+          TextField(
+            autofocus: false,
+            focusNode: _focusNode2,
+            controller: summController,
+            inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*\.?\d{0,2})'))],
+            decoration: const InputDecoration(hintText: 'Сумма'),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            contextExternal.sendEvent<TableBloc>(
+              TableEvent.editRowDone(
+                Sell(
+                  fullname: _person!.fullname,
+                  summ: double.parse(summController.text),
+                  date: state.sells[index].date,
+                ),
+                index,
+              ),
+            );
+          },
+          child: const Text('Внести изменения'),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('Отмена'),
         ),
       ],
     );

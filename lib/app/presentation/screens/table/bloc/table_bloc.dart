@@ -13,7 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'table_bloc.freezed.dart';
+
 part 'table_event.dart';
+
 part 'table_state.dart';
 
 class TableBloc extends Bloc<TableEvent, TableState> {
@@ -21,11 +23,13 @@ class TableBloc extends Bloc<TableEvent, TableState> {
     this._appRouter,
   ) : super(TableState()) {
     on<_Init>(_init);
-    on<_MovePressed>(_movePressed);
     on<_SelectPerson>(_selectPerson);
     on<_AddNew>(_addNew);
     on<_SwitchCurrentStateWindow>(_switchCurrentStateWindow);
     on<_StatementPressed>(_statementPressed);
+    on<_OnEnterPressed>(_onEnterPressed);
+    on<_OnLongPressRow>(_onLongPressRow);
+    on<_EditRowDone>(_onEditRowDone);
     add(const TableEvent.init());
   }
 
@@ -54,32 +58,9 @@ class TableBloc extends Bloc<TableEvent, TableState> {
     emit(state.copyWith(sells: sells, persons: personsList));
   }
 
-  FutureOr<void> _movePressed(_MovePressed event, Emitter<TableState> emit) async {
-    emit(state.copyWith(leftButtonActive: false, rightButtonActive: false));
-    if (state.axisCurrent == MainAxisAlignment.start) {
-      emit(state.copyWith(axisCurrent: MainAxisAlignment.end));
-      await Future.delayed(state.duration);
-      emit(state.copyWith(leftButtonActive: true, rightButtonActive: false));
-    } else {
-      emit(state.copyWith(axisCurrent: MainAxisAlignment.start));
-      await Future.delayed(state.duration);
-      emit(state.copyWith(leftButtonActive: false, rightButtonActive: true));
-    }
-  }
-
-  FutureOr<void> _selectPerson(_SelectPerson event, Emitter<TableState> emit) async {
-    emit(state.copyWith(selectedPerson: event.fullname));
-  }
-
-  FutureOr<void> _addNew(_AddNew event, Emitter<TableState> emit) {
-    List<Sell> sells = [];
-    sells.addAll(state.sells);
-    sells.add(event.sell);
-    emit(state.copyWith(sells: sells));
-  }
-
   FutureOr<void> _switchCurrentStateWindow(_SwitchCurrentStateWindow event, Emitter<TableState> emit) {
     final win = appWindow;
+    emit(state.copyWith(selectedPerson: null));
     switch (state.currentStateWindow) {
       case CurrentStateWindow.active:
         emit(state.copyWith(positionWindowOnActive: win.position));
@@ -107,9 +88,38 @@ class TableBloc extends Bloc<TableEvent, TableState> {
     }
   }
 
+  FutureOr<void> _selectPerson(_SelectPerson event, Emitter<TableState> emit) async {
+    emit(state.copyWith(selectedPerson: event.person));
+  }
+
+  FutureOr<void> _addNew(_AddNew event, Emitter<TableState> emit) {
+    List<Sell> sells = [];
+    sells.addAll(state.sells);
+    sells.add(event.sell);
+    emit(state.copyWith(sells: sells, selectedPerson: null));
+    add(const TableEvent.switchCurrentStateWindow());
+  }
+
   Future<FutureOr<void>> _statementPressed(_StatementPressed event, Emitter<TableState> emit) async {
     String path = "/xls/r.xlsx";
     ExcelHelper.createExcelFromSells(sells: Sells(sells: state.sells), path: path);
     print('file create');
+    emit(state.copyWith(action: ShowStatementDone()));
+  }
+
+  FutureOr<void> _onEnterPressed(_OnEnterPressed event, Emitter<TableState> emit) {
+    add(const TableEvent.switchCurrentStateWindow());
+  }
+
+  FutureOr<void> _onLongPressRow(_OnLongPressRow event, Emitter<TableState> emit) {
+    emit(state.copyWith(action: ShowEditingModal(event.index)));
+  }
+
+  FutureOr<void> _onEditRowDone(_EditRowDone event, Emitter<TableState> emit) {
+    List<Sell> sells = [];
+    sells.addAll(state.sells);
+    sells.removeAt(event.index);
+    sells.insert(event.index, event.sell);
+    emit(state.copyWith(sells: sells, selectedPerson: null));
   }
 }

@@ -21,12 +21,15 @@ mixin _$TableEvent {
     required TResult Function() init,
     required TResult Function() movePressed,
     required TResult Function(Sell sell) addNew,
-    required TResult Function(String fullname) addNewPerson,
-    required TResult Function(String fullname) selectPerson,
+    required TResult Function(Person person) addNewPerson,
+    required TResult Function(Person person) selectPerson,
     required TResult Function() closePressed,
     required TResult Function() statementPressed,
     required TResult Function() declarationPressed,
     required TResult Function() switchCurrentStateWindow,
+    required TResult Function(int index) onLongPressRow,
+    required TResult Function() onEnterPressed,
+    required TResult Function(Sell sell, int index) editRowDone,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,12 +37,15 @@ mixin _$TableEvent {
     TResult? Function()? init,
     TResult? Function()? movePressed,
     TResult? Function(Sell sell)? addNew,
-    TResult? Function(String fullname)? addNewPerson,
-    TResult? Function(String fullname)? selectPerson,
+    TResult? Function(Person person)? addNewPerson,
+    TResult? Function(Person person)? selectPerson,
     TResult? Function()? closePressed,
     TResult? Function()? statementPressed,
     TResult? Function()? declarationPressed,
     TResult? Function()? switchCurrentStateWindow,
+    TResult? Function(int index)? onLongPressRow,
+    TResult? Function()? onEnterPressed,
+    TResult? Function(Sell sell, int index)? editRowDone,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,12 +53,15 @@ mixin _$TableEvent {
     TResult Function()? init,
     TResult Function()? movePressed,
     TResult Function(Sell sell)? addNew,
-    TResult Function(String fullname)? addNewPerson,
-    TResult Function(String fullname)? selectPerson,
+    TResult Function(Person person)? addNewPerson,
+    TResult Function(Person person)? selectPerson,
     TResult Function()? closePressed,
     TResult Function()? statementPressed,
     TResult Function()? declarationPressed,
     TResult Function()? switchCurrentStateWindow,
+    TResult Function(int index)? onLongPressRow,
+    TResult Function()? onEnterPressed,
+    TResult Function(Sell sell, int index)? editRowDone,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -68,6 +77,9 @@ mixin _$TableEvent {
     required TResult Function(_DeclarationPressed value) declarationPressed,
     required TResult Function(_SwitchCurrentStateWindow value)
         switchCurrentStateWindow,
+    required TResult Function(_OnLongPressRow value) onLongPressRow,
+    required TResult Function(_OnEnterPressed value) onEnterPressed,
+    required TResult Function(_EditRowDone value) editRowDone,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -82,6 +94,9 @@ mixin _$TableEvent {
     TResult? Function(_DeclarationPressed value)? declarationPressed,
     TResult? Function(_SwitchCurrentStateWindow value)?
         switchCurrentStateWindow,
+    TResult? Function(_OnLongPressRow value)? onLongPressRow,
+    TResult? Function(_OnEnterPressed value)? onEnterPressed,
+    TResult? Function(_EditRowDone value)? editRowDone,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -95,6 +110,9 @@ mixin _$TableEvent {
     TResult Function(_StatementPressed value)? statementPressed,
     TResult Function(_DeclarationPressed value)? declarationPressed,
     TResult Function(_SwitchCurrentStateWindow value)? switchCurrentStateWindow,
+    TResult Function(_OnLongPressRow value)? onLongPressRow,
+    TResult Function(_OnEnterPressed value)? onEnterPressed,
+    TResult Function(_EditRowDone value)? editRowDone,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -157,12 +175,15 @@ class _$_Init implements _Init {
     required TResult Function() init,
     required TResult Function() movePressed,
     required TResult Function(Sell sell) addNew,
-    required TResult Function(String fullname) addNewPerson,
-    required TResult Function(String fullname) selectPerson,
+    required TResult Function(Person person) addNewPerson,
+    required TResult Function(Person person) selectPerson,
     required TResult Function() closePressed,
     required TResult Function() statementPressed,
     required TResult Function() declarationPressed,
     required TResult Function() switchCurrentStateWindow,
+    required TResult Function(int index) onLongPressRow,
+    required TResult Function() onEnterPressed,
+    required TResult Function(Sell sell, int index) editRowDone,
   }) {
     return init();
   }
@@ -173,12 +194,15 @@ class _$_Init implements _Init {
     TResult? Function()? init,
     TResult? Function()? movePressed,
     TResult? Function(Sell sell)? addNew,
-    TResult? Function(String fullname)? addNewPerson,
-    TResult? Function(String fullname)? selectPerson,
+    TResult? Function(Person person)? addNewPerson,
+    TResult? Function(Person person)? selectPerson,
     TResult? Function()? closePressed,
     TResult? Function()? statementPressed,
     TResult? Function()? declarationPressed,
     TResult? Function()? switchCurrentStateWindow,
+    TResult? Function(int index)? onLongPressRow,
+    TResult? Function()? onEnterPressed,
+    TResult? Function(Sell sell, int index)? editRowDone,
   }) {
     return init?.call();
   }
@@ -189,12 +213,15 @@ class _$_Init implements _Init {
     TResult Function()? init,
     TResult Function()? movePressed,
     TResult Function(Sell sell)? addNew,
-    TResult Function(String fullname)? addNewPerson,
-    TResult Function(String fullname)? selectPerson,
+    TResult Function(Person person)? addNewPerson,
+    TResult Function(Person person)? selectPerson,
     TResult Function()? closePressed,
     TResult Function()? statementPressed,
     TResult Function()? declarationPressed,
     TResult Function()? switchCurrentStateWindow,
+    TResult Function(int index)? onLongPressRow,
+    TResult Function()? onEnterPressed,
+    TResult Function(Sell sell, int index)? editRowDone,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -216,6 +243,9 @@ class _$_Init implements _Init {
     required TResult Function(_DeclarationPressed value) declarationPressed,
     required TResult Function(_SwitchCurrentStateWindow value)
         switchCurrentStateWindow,
+    required TResult Function(_OnLongPressRow value) onLongPressRow,
+    required TResult Function(_OnEnterPressed value) onEnterPressed,
+    required TResult Function(_EditRowDone value) editRowDone,
   }) {
     return init(this);
   }
@@ -233,6 +263,9 @@ class _$_Init implements _Init {
     TResult? Function(_DeclarationPressed value)? declarationPressed,
     TResult? Function(_SwitchCurrentStateWindow value)?
         switchCurrentStateWindow,
+    TResult? Function(_OnLongPressRow value)? onLongPressRow,
+    TResult? Function(_OnEnterPressed value)? onEnterPressed,
+    TResult? Function(_EditRowDone value)? editRowDone,
   }) {
     return init?.call(this);
   }
@@ -249,6 +282,9 @@ class _$_Init implements _Init {
     TResult Function(_StatementPressed value)? statementPressed,
     TResult Function(_DeclarationPressed value)? declarationPressed,
     TResult Function(_SwitchCurrentStateWindow value)? switchCurrentStateWindow,
+    TResult Function(_OnLongPressRow value)? onLongPressRow,
+    TResult Function(_OnEnterPressed value)? onEnterPressed,
+    TResult Function(_EditRowDone value)? editRowDone,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -303,12 +339,15 @@ class _$_MovePressed implements _MovePressed {
     required TResult Function() init,
     required TResult Function() movePressed,
     required TResult Function(Sell sell) addNew,
-    required TResult Function(String fullname) addNewPerson,
-    required TResult Function(String fullname) selectPerson,
+    required TResult Function(Person person) addNewPerson,
+    required TResult Function(Person person) selectPerson,
     required TResult Function() closePressed,
     required TResult Function() statementPressed,
     required TResult Function() declarationPressed,
     required TResult Function() switchCurrentStateWindow,
+    required TResult Function(int index) onLongPressRow,
+    required TResult Function() onEnterPressed,
+    required TResult Function(Sell sell, int index) editRowDone,
   }) {
     return movePressed();
   }
@@ -319,12 +358,15 @@ class _$_MovePressed implements _MovePressed {
     TResult? Function()? init,
     TResult? Function()? movePressed,
     TResult? Function(Sell sell)? addNew,
-    TResult? Function(String fullname)? addNewPerson,
-    TResult? Function(String fullname)? selectPerson,
+    TResult? Function(Person person)? addNewPerson,
+    TResult? Function(Person person)? selectPerson,
     TResult? Function()? closePressed,
     TResult? Function()? statementPressed,
     TResult? Function()? declarationPressed,
     TResult? Function()? switchCurrentStateWindow,
+    TResult? Function(int index)? onLongPressRow,
+    TResult? Function()? onEnterPressed,
+    TResult? Function(Sell sell, int index)? editRowDone,
   }) {
     return movePressed?.call();
   }
@@ -335,12 +377,15 @@ class _$_MovePressed implements _MovePressed {
     TResult Function()? init,
     TResult Function()? movePressed,
     TResult Function(Sell sell)? addNew,
-    TResult Function(String fullname)? addNewPerson,
-    TResult Function(String fullname)? selectPerson,
+    TResult Function(Person person)? addNewPerson,
+    TResult Function(Person person)? selectPerson,
     TResult Function()? closePressed,
     TResult Function()? statementPressed,
     TResult Function()? declarationPressed,
     TResult Function()? switchCurrentStateWindow,
+    TResult Function(int index)? onLongPressRow,
+    TResult Function()? onEnterPressed,
+    TResult Function(Sell sell, int index)? editRowDone,
     required TResult orElse(),
   }) {
     if (movePressed != null) {
@@ -362,6 +407,9 @@ class _$_MovePressed implements _MovePressed {
     required TResult Function(_DeclarationPressed value) declarationPressed,
     required TResult Function(_SwitchCurrentStateWindow value)
         switchCurrentStateWindow,
+    required TResult Function(_OnLongPressRow value) onLongPressRow,
+    required TResult Function(_OnEnterPressed value) onEnterPressed,
+    required TResult Function(_EditRowDone value) editRowDone,
   }) {
     return movePressed(this);
   }
@@ -379,6 +427,9 @@ class _$_MovePressed implements _MovePressed {
     TResult? Function(_DeclarationPressed value)? declarationPressed,
     TResult? Function(_SwitchCurrentStateWindow value)?
         switchCurrentStateWindow,
+    TResult? Function(_OnLongPressRow value)? onLongPressRow,
+    TResult? Function(_OnEnterPressed value)? onEnterPressed,
+    TResult? Function(_EditRowDone value)? editRowDone,
   }) {
     return movePressed?.call(this);
   }
@@ -395,6 +446,9 @@ class _$_MovePressed implements _MovePressed {
     TResult Function(_StatementPressed value)? statementPressed,
     TResult Function(_DeclarationPressed value)? declarationPressed,
     TResult Function(_SwitchCurrentStateWindow value)? switchCurrentStateWindow,
+    TResult Function(_OnLongPressRow value)? onLongPressRow,
+    TResult Function(_OnEnterPressed value)? onEnterPressed,
+    TResult Function(_EditRowDone value)? editRowDone,
     required TResult orElse(),
   }) {
     if (movePressed != null) {
@@ -473,12 +527,15 @@ class _$_AddNew implements _AddNew {
     required TResult Function() init,
     required TResult Function() movePressed,
     required TResult Function(Sell sell) addNew,
-    required TResult Function(String fullname) addNewPerson,
-    required TResult Function(String fullname) selectPerson,
+    required TResult Function(Person person) addNewPerson,
+    required TResult Function(Person person) selectPerson,
     required TResult Function() closePressed,
     required TResult Function() statementPressed,
     required TResult Function() declarationPressed,
     required TResult Function() switchCurrentStateWindow,
+    required TResult Function(int index) onLongPressRow,
+    required TResult Function() onEnterPressed,
+    required TResult Function(Sell sell, int index) editRowDone,
   }) {
     return addNew(sell);
   }
@@ -489,12 +546,15 @@ class _$_AddNew implements _AddNew {
     TResult? Function()? init,
     TResult? Function()? movePressed,
     TResult? Function(Sell sell)? addNew,
-    TResult? Function(String fullname)? addNewPerson,
-    TResult? Function(String fullname)? selectPerson,
+    TResult? Function(Person person)? addNewPerson,
+    TResult? Function(Person person)? selectPerson,
     TResult? Function()? closePressed,
     TResult? Function()? statementPressed,
     TResult? Function()? declarationPressed,
     TResult? Function()? switchCurrentStateWindow,
+    TResult? Function(int index)? onLongPressRow,
+    TResult? Function()? onEnterPressed,
+    TResult? Function(Sell sell, int index)? editRowDone,
   }) {
     return addNew?.call(sell);
   }
@@ -505,12 +565,15 @@ class _$_AddNew implements _AddNew {
     TResult Function()? init,
     TResult Function()? movePressed,
     TResult Function(Sell sell)? addNew,
-    TResult Function(String fullname)? addNewPerson,
-    TResult Function(String fullname)? selectPerson,
+    TResult Function(Person person)? addNewPerson,
+    TResult Function(Person person)? selectPerson,
     TResult Function()? closePressed,
     TResult Function()? statementPressed,
     TResult Function()? declarationPressed,
     TResult Function()? switchCurrentStateWindow,
+    TResult Function(int index)? onLongPressRow,
+    TResult Function()? onEnterPressed,
+    TResult Function(Sell sell, int index)? editRowDone,
     required TResult orElse(),
   }) {
     if (addNew != null) {
@@ -532,6 +595,9 @@ class _$_AddNew implements _AddNew {
     required TResult Function(_DeclarationPressed value) declarationPressed,
     required TResult Function(_SwitchCurrentStateWindow value)
         switchCurrentStateWindow,
+    required TResult Function(_OnLongPressRow value) onLongPressRow,
+    required TResult Function(_OnEnterPressed value) onEnterPressed,
+    required TResult Function(_EditRowDone value) editRowDone,
   }) {
     return addNew(this);
   }
@@ -549,6 +615,9 @@ class _$_AddNew implements _AddNew {
     TResult? Function(_DeclarationPressed value)? declarationPressed,
     TResult? Function(_SwitchCurrentStateWindow value)?
         switchCurrentStateWindow,
+    TResult? Function(_OnLongPressRow value)? onLongPressRow,
+    TResult? Function(_OnEnterPressed value)? onEnterPressed,
+    TResult? Function(_EditRowDone value)? editRowDone,
   }) {
     return addNew?.call(this);
   }
@@ -565,6 +634,9 @@ class _$_AddNew implements _AddNew {
     TResult Function(_StatementPressed value)? statementPressed,
     TResult Function(_DeclarationPressed value)? declarationPressed,
     TResult Function(_SwitchCurrentStateWindow value)? switchCurrentStateWindow,
+    TResult Function(_OnLongPressRow value)? onLongPressRow,
+    TResult Function(_OnEnterPressed value)? onEnterPressed,
+    TResult Function(_EditRowDone value)? editRowDone,
     required TResult orElse(),
   }) {
     if (addNew != null) {
@@ -589,7 +661,7 @@ abstract class _$$_AddNewPersonCopyWith<$Res> {
           _$_AddNewPerson value, $Res Function(_$_AddNewPerson) then) =
       __$$_AddNewPersonCopyWithImpl<$Res>;
   @useResult
-  $Res call({String fullname});
+  $Res call({Person person});
 }
 
 /// @nodoc
@@ -603,13 +675,13 @@ class __$$_AddNewPersonCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? fullname = null,
+    Object? person = null,
   }) {
     return _then(_$_AddNewPerson(
-      null == fullname
-          ? _value.fullname
-          : fullname // ignore: cast_nullable_to_non_nullable
-              as String,
+      null == person
+          ? _value.person
+          : person // ignore: cast_nullable_to_non_nullable
+              as Person,
     ));
   }
 }
@@ -617,14 +689,14 @@ class __$$_AddNewPersonCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AddNewPerson implements _AddNewPerson {
-  const _$_AddNewPerson(this.fullname);
+  const _$_AddNewPerson(this.person);
 
   @override
-  final String fullname;
+  final Person person;
 
   @override
   String toString() {
-    return 'TableEvent.addNewPerson(fullname: $fullname)';
+    return 'TableEvent.addNewPerson(person: $person)';
   }
 
   @override
@@ -632,12 +704,11 @@ class _$_AddNewPerson implements _AddNewPerson {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AddNewPerson &&
-            (identical(other.fullname, fullname) ||
-                other.fullname == fullname));
+            (identical(other.person, person) || other.person == person));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, fullname);
+  int get hashCode => Object.hash(runtimeType, person);
 
   @JsonKey(ignore: true)
   @override
@@ -651,14 +722,17 @@ class _$_AddNewPerson implements _AddNewPerson {
     required TResult Function() init,
     required TResult Function() movePressed,
     required TResult Function(Sell sell) addNew,
-    required TResult Function(String fullname) addNewPerson,
-    required TResult Function(String fullname) selectPerson,
+    required TResult Function(Person person) addNewPerson,
+    required TResult Function(Person person) selectPerson,
     required TResult Function() closePressed,
     required TResult Function() statementPressed,
     required TResult Function() declarationPressed,
     required TResult Function() switchCurrentStateWindow,
+    required TResult Function(int index) onLongPressRow,
+    required TResult Function() onEnterPressed,
+    required TResult Function(Sell sell, int index) editRowDone,
   }) {
-    return addNewPerson(fullname);
+    return addNewPerson(person);
   }
 
   @override
@@ -667,14 +741,17 @@ class _$_AddNewPerson implements _AddNewPerson {
     TResult? Function()? init,
     TResult? Function()? movePressed,
     TResult? Function(Sell sell)? addNew,
-    TResult? Function(String fullname)? addNewPerson,
-    TResult? Function(String fullname)? selectPerson,
+    TResult? Function(Person person)? addNewPerson,
+    TResult? Function(Person person)? selectPerson,
     TResult? Function()? closePressed,
     TResult? Function()? statementPressed,
     TResult? Function()? declarationPressed,
     TResult? Function()? switchCurrentStateWindow,
+    TResult? Function(int index)? onLongPressRow,
+    TResult? Function()? onEnterPressed,
+    TResult? Function(Sell sell, int index)? editRowDone,
   }) {
-    return addNewPerson?.call(fullname);
+    return addNewPerson?.call(person);
   }
 
   @override
@@ -683,16 +760,19 @@ class _$_AddNewPerson implements _AddNewPerson {
     TResult Function()? init,
     TResult Function()? movePressed,
     TResult Function(Sell sell)? addNew,
-    TResult Function(String fullname)? addNewPerson,
-    TResult Function(String fullname)? selectPerson,
+    TResult Function(Person person)? addNewPerson,
+    TResult Function(Person person)? selectPerson,
     TResult Function()? closePressed,
     TResult Function()? statementPressed,
     TResult Function()? declarationPressed,
     TResult Function()? switchCurrentStateWindow,
+    TResult Function(int index)? onLongPressRow,
+    TResult Function()? onEnterPressed,
+    TResult Function(Sell sell, int index)? editRowDone,
     required TResult orElse(),
   }) {
     if (addNewPerson != null) {
-      return addNewPerson(fullname);
+      return addNewPerson(person);
     }
     return orElse();
   }
@@ -710,6 +790,9 @@ class _$_AddNewPerson implements _AddNewPerson {
     required TResult Function(_DeclarationPressed value) declarationPressed,
     required TResult Function(_SwitchCurrentStateWindow value)
         switchCurrentStateWindow,
+    required TResult Function(_OnLongPressRow value) onLongPressRow,
+    required TResult Function(_OnEnterPressed value) onEnterPressed,
+    required TResult Function(_EditRowDone value) editRowDone,
   }) {
     return addNewPerson(this);
   }
@@ -727,6 +810,9 @@ class _$_AddNewPerson implements _AddNewPerson {
     TResult? Function(_DeclarationPressed value)? declarationPressed,
     TResult? Function(_SwitchCurrentStateWindow value)?
         switchCurrentStateWindow,
+    TResult? Function(_OnLongPressRow value)? onLongPressRow,
+    TResult? Function(_OnEnterPressed value)? onEnterPressed,
+    TResult? Function(_EditRowDone value)? editRowDone,
   }) {
     return addNewPerson?.call(this);
   }
@@ -743,6 +829,9 @@ class _$_AddNewPerson implements _AddNewPerson {
     TResult Function(_StatementPressed value)? statementPressed,
     TResult Function(_DeclarationPressed value)? declarationPressed,
     TResult Function(_SwitchCurrentStateWindow value)? switchCurrentStateWindow,
+    TResult Function(_OnLongPressRow value)? onLongPressRow,
+    TResult Function(_OnEnterPressed value)? onEnterPressed,
+    TResult Function(_EditRowDone value)? editRowDone,
     required TResult orElse(),
   }) {
     if (addNewPerson != null) {
@@ -753,9 +842,9 @@ class _$_AddNewPerson implements _AddNewPerson {
 }
 
 abstract class _AddNewPerson implements TableEvent {
-  const factory _AddNewPerson(final String fullname) = _$_AddNewPerson;
+  const factory _AddNewPerson(final Person person) = _$_AddNewPerson;
 
-  String get fullname;
+  Person get person;
   @JsonKey(ignore: true)
   _$$_AddNewPersonCopyWith<_$_AddNewPerson> get copyWith =>
       throw _privateConstructorUsedError;
@@ -767,7 +856,7 @@ abstract class _$$_SelectPersonCopyWith<$Res> {
           _$_SelectPerson value, $Res Function(_$_SelectPerson) then) =
       __$$_SelectPersonCopyWithImpl<$Res>;
   @useResult
-  $Res call({String fullname});
+  $Res call({Person person});
 }
 
 /// @nodoc
@@ -781,13 +870,13 @@ class __$$_SelectPersonCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? fullname = null,
+    Object? person = null,
   }) {
     return _then(_$_SelectPerson(
-      null == fullname
-          ? _value.fullname
-          : fullname // ignore: cast_nullable_to_non_nullable
-              as String,
+      null == person
+          ? _value.person
+          : person // ignore: cast_nullable_to_non_nullable
+              as Person,
     ));
   }
 }
@@ -795,14 +884,14 @@ class __$$_SelectPersonCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SelectPerson implements _SelectPerson {
-  const _$_SelectPerson(this.fullname);
+  const _$_SelectPerson(this.person);
 
   @override
-  final String fullname;
+  final Person person;
 
   @override
   String toString() {
-    return 'TableEvent.selectPerson(fullname: $fullname)';
+    return 'TableEvent.selectPerson(person: $person)';
   }
 
   @override
@@ -810,12 +899,11 @@ class _$_SelectPerson implements _SelectPerson {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SelectPerson &&
-            (identical(other.fullname, fullname) ||
-                other.fullname == fullname));
+            (identical(other.person, person) || other.person == person));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, fullname);
+  int get hashCode => Object.hash(runtimeType, person);
 
   @JsonKey(ignore: true)
   @override
@@ -829,14 +917,17 @@ class _$_SelectPerson implements _SelectPerson {
     required TResult Function() init,
     required TResult Function() movePressed,
     required TResult Function(Sell sell) addNew,
-    required TResult Function(String fullname) addNewPerson,
-    required TResult Function(String fullname) selectPerson,
+    required TResult Function(Person person) addNewPerson,
+    required TResult Function(Person person) selectPerson,
     required TResult Function() closePressed,
     required TResult Function() statementPressed,
     required TResult Function() declarationPressed,
     required TResult Function() switchCurrentStateWindow,
+    required TResult Function(int index) onLongPressRow,
+    required TResult Function() onEnterPressed,
+    required TResult Function(Sell sell, int index) editRowDone,
   }) {
-    return selectPerson(fullname);
+    return selectPerson(person);
   }
 
   @override
@@ -845,14 +936,17 @@ class _$_SelectPerson implements _SelectPerson {
     TResult? Function()? init,
     TResult? Function()? movePressed,
     TResult? Function(Sell sell)? addNew,
-    TResult? Function(String fullname)? addNewPerson,
-    TResult? Function(String fullname)? selectPerson,
+    TResult? Function(Person person)? addNewPerson,
+    TResult? Function(Person person)? selectPerson,
     TResult? Function()? closePressed,
     TResult? Function()? statementPressed,
     TResult? Function()? declarationPressed,
     TResult? Function()? switchCurrentStateWindow,
+    TResult? Function(int index)? onLongPressRow,
+    TResult? Function()? onEnterPressed,
+    TResult? Function(Sell sell, int index)? editRowDone,
   }) {
-    return selectPerson?.call(fullname);
+    return selectPerson?.call(person);
   }
 
   @override
@@ -861,16 +955,19 @@ class _$_SelectPerson implements _SelectPerson {
     TResult Function()? init,
     TResult Function()? movePressed,
     TResult Function(Sell sell)? addNew,
-    TResult Function(String fullname)? addNewPerson,
-    TResult Function(String fullname)? selectPerson,
+    TResult Function(Person person)? addNewPerson,
+    TResult Function(Person person)? selectPerson,
     TResult Function()? closePressed,
     TResult Function()? statementPressed,
     TResult Function()? declarationPressed,
     TResult Function()? switchCurrentStateWindow,
+    TResult Function(int index)? onLongPressRow,
+    TResult Function()? onEnterPressed,
+    TResult Function(Sell sell, int index)? editRowDone,
     required TResult orElse(),
   }) {
     if (selectPerson != null) {
-      return selectPerson(fullname);
+      return selectPerson(person);
     }
     return orElse();
   }
@@ -888,6 +985,9 @@ class _$_SelectPerson implements _SelectPerson {
     required TResult Function(_DeclarationPressed value) declarationPressed,
     required TResult Function(_SwitchCurrentStateWindow value)
         switchCurrentStateWindow,
+    required TResult Function(_OnLongPressRow value) onLongPressRow,
+    required TResult Function(_OnEnterPressed value) onEnterPressed,
+    required TResult Function(_EditRowDone value) editRowDone,
   }) {
     return selectPerson(this);
   }
@@ -905,6 +1005,9 @@ class _$_SelectPerson implements _SelectPerson {
     TResult? Function(_DeclarationPressed value)? declarationPressed,
     TResult? Function(_SwitchCurrentStateWindow value)?
         switchCurrentStateWindow,
+    TResult? Function(_OnLongPressRow value)? onLongPressRow,
+    TResult? Function(_OnEnterPressed value)? onEnterPressed,
+    TResult? Function(_EditRowDone value)? editRowDone,
   }) {
     return selectPerson?.call(this);
   }
@@ -921,6 +1024,9 @@ class _$_SelectPerson implements _SelectPerson {
     TResult Function(_StatementPressed value)? statementPressed,
     TResult Function(_DeclarationPressed value)? declarationPressed,
     TResult Function(_SwitchCurrentStateWindow value)? switchCurrentStateWindow,
+    TResult Function(_OnLongPressRow value)? onLongPressRow,
+    TResult Function(_OnEnterPressed value)? onEnterPressed,
+    TResult Function(_EditRowDone value)? editRowDone,
     required TResult orElse(),
   }) {
     if (selectPerson != null) {
@@ -931,9 +1037,9 @@ class _$_SelectPerson implements _SelectPerson {
 }
 
 abstract class _SelectPerson implements TableEvent {
-  const factory _SelectPerson(final String fullname) = _$_SelectPerson;
+  const factory _SelectPerson(final Person person) = _$_SelectPerson;
 
-  String get fullname;
+  Person get person;
   @JsonKey(ignore: true)
   _$$_SelectPersonCopyWith<_$_SelectPerson> get copyWith =>
       throw _privateConstructorUsedError;
@@ -980,12 +1086,15 @@ class _$_ClosePressed implements _ClosePressed {
     required TResult Function() init,
     required TResult Function() movePressed,
     required TResult Function(Sell sell) addNew,
-    required TResult Function(String fullname) addNewPerson,
-    required TResult Function(String fullname) selectPerson,
+    required TResult Function(Person person) addNewPerson,
+    required TResult Function(Person person) selectPerson,
     required TResult Function() closePressed,
     required TResult Function() statementPressed,
     required TResult Function() declarationPressed,
     required TResult Function() switchCurrentStateWindow,
+    required TResult Function(int index) onLongPressRow,
+    required TResult Function() onEnterPressed,
+    required TResult Function(Sell sell, int index) editRowDone,
   }) {
     return closePressed();
   }
@@ -996,12 +1105,15 @@ class _$_ClosePressed implements _ClosePressed {
     TResult? Function()? init,
     TResult? Function()? movePressed,
     TResult? Function(Sell sell)? addNew,
-    TResult? Function(String fullname)? addNewPerson,
-    TResult? Function(String fullname)? selectPerson,
+    TResult? Function(Person person)? addNewPerson,
+    TResult? Function(Person person)? selectPerson,
     TResult? Function()? closePressed,
     TResult? Function()? statementPressed,
     TResult? Function()? declarationPressed,
     TResult? Function()? switchCurrentStateWindow,
+    TResult? Function(int index)? onLongPressRow,
+    TResult? Function()? onEnterPressed,
+    TResult? Function(Sell sell, int index)? editRowDone,
   }) {
     return closePressed?.call();
   }
@@ -1012,12 +1124,15 @@ class _$_ClosePressed implements _ClosePressed {
     TResult Function()? init,
     TResult Function()? movePressed,
     TResult Function(Sell sell)? addNew,
-    TResult Function(String fullname)? addNewPerson,
-    TResult Function(String fullname)? selectPerson,
+    TResult Function(Person person)? addNewPerson,
+    TResult Function(Person person)? selectPerson,
     TResult Function()? closePressed,
     TResult Function()? statementPressed,
     TResult Function()? declarationPressed,
     TResult Function()? switchCurrentStateWindow,
+    TResult Function(int index)? onLongPressRow,
+    TResult Function()? onEnterPressed,
+    TResult Function(Sell sell, int index)? editRowDone,
     required TResult orElse(),
   }) {
     if (closePressed != null) {
@@ -1039,6 +1154,9 @@ class _$_ClosePressed implements _ClosePressed {
     required TResult Function(_DeclarationPressed value) declarationPressed,
     required TResult Function(_SwitchCurrentStateWindow value)
         switchCurrentStateWindow,
+    required TResult Function(_OnLongPressRow value) onLongPressRow,
+    required TResult Function(_OnEnterPressed value) onEnterPressed,
+    required TResult Function(_EditRowDone value) editRowDone,
   }) {
     return closePressed(this);
   }
@@ -1056,6 +1174,9 @@ class _$_ClosePressed implements _ClosePressed {
     TResult? Function(_DeclarationPressed value)? declarationPressed,
     TResult? Function(_SwitchCurrentStateWindow value)?
         switchCurrentStateWindow,
+    TResult? Function(_OnLongPressRow value)? onLongPressRow,
+    TResult? Function(_OnEnterPressed value)? onEnterPressed,
+    TResult? Function(_EditRowDone value)? editRowDone,
   }) {
     return closePressed?.call(this);
   }
@@ -1072,6 +1193,9 @@ class _$_ClosePressed implements _ClosePressed {
     TResult Function(_StatementPressed value)? statementPressed,
     TResult Function(_DeclarationPressed value)? declarationPressed,
     TResult Function(_SwitchCurrentStateWindow value)? switchCurrentStateWindow,
+    TResult Function(_OnLongPressRow value)? onLongPressRow,
+    TResult Function(_OnEnterPressed value)? onEnterPressed,
+    TResult Function(_EditRowDone value)? editRowDone,
     required TResult orElse(),
   }) {
     if (closePressed != null) {
@@ -1126,12 +1250,15 @@ class _$_StatementPressed implements _StatementPressed {
     required TResult Function() init,
     required TResult Function() movePressed,
     required TResult Function(Sell sell) addNew,
-    required TResult Function(String fullname) addNewPerson,
-    required TResult Function(String fullname) selectPerson,
+    required TResult Function(Person person) addNewPerson,
+    required TResult Function(Person person) selectPerson,
     required TResult Function() closePressed,
     required TResult Function() statementPressed,
     required TResult Function() declarationPressed,
     required TResult Function() switchCurrentStateWindow,
+    required TResult Function(int index) onLongPressRow,
+    required TResult Function() onEnterPressed,
+    required TResult Function(Sell sell, int index) editRowDone,
   }) {
     return statementPressed();
   }
@@ -1142,12 +1269,15 @@ class _$_StatementPressed implements _StatementPressed {
     TResult? Function()? init,
     TResult? Function()? movePressed,
     TResult? Function(Sell sell)? addNew,
-    TResult? Function(String fullname)? addNewPerson,
-    TResult? Function(String fullname)? selectPerson,
+    TResult? Function(Person person)? addNewPerson,
+    TResult? Function(Person person)? selectPerson,
     TResult? Function()? closePressed,
     TResult? Function()? statementPressed,
     TResult? Function()? declarationPressed,
     TResult? Function()? switchCurrentStateWindow,
+    TResult? Function(int index)? onLongPressRow,
+    TResult? Function()? onEnterPressed,
+    TResult? Function(Sell sell, int index)? editRowDone,
   }) {
     return statementPressed?.call();
   }
@@ -1158,12 +1288,15 @@ class _$_StatementPressed implements _StatementPressed {
     TResult Function()? init,
     TResult Function()? movePressed,
     TResult Function(Sell sell)? addNew,
-    TResult Function(String fullname)? addNewPerson,
-    TResult Function(String fullname)? selectPerson,
+    TResult Function(Person person)? addNewPerson,
+    TResult Function(Person person)? selectPerson,
     TResult Function()? closePressed,
     TResult Function()? statementPressed,
     TResult Function()? declarationPressed,
     TResult Function()? switchCurrentStateWindow,
+    TResult Function(int index)? onLongPressRow,
+    TResult Function()? onEnterPressed,
+    TResult Function(Sell sell, int index)? editRowDone,
     required TResult orElse(),
   }) {
     if (statementPressed != null) {
@@ -1185,6 +1318,9 @@ class _$_StatementPressed implements _StatementPressed {
     required TResult Function(_DeclarationPressed value) declarationPressed,
     required TResult Function(_SwitchCurrentStateWindow value)
         switchCurrentStateWindow,
+    required TResult Function(_OnLongPressRow value) onLongPressRow,
+    required TResult Function(_OnEnterPressed value) onEnterPressed,
+    required TResult Function(_EditRowDone value) editRowDone,
   }) {
     return statementPressed(this);
   }
@@ -1202,6 +1338,9 @@ class _$_StatementPressed implements _StatementPressed {
     TResult? Function(_DeclarationPressed value)? declarationPressed,
     TResult? Function(_SwitchCurrentStateWindow value)?
         switchCurrentStateWindow,
+    TResult? Function(_OnLongPressRow value)? onLongPressRow,
+    TResult? Function(_OnEnterPressed value)? onEnterPressed,
+    TResult? Function(_EditRowDone value)? editRowDone,
   }) {
     return statementPressed?.call(this);
   }
@@ -1218,6 +1357,9 @@ class _$_StatementPressed implements _StatementPressed {
     TResult Function(_StatementPressed value)? statementPressed,
     TResult Function(_DeclarationPressed value)? declarationPressed,
     TResult Function(_SwitchCurrentStateWindow value)? switchCurrentStateWindow,
+    TResult Function(_OnLongPressRow value)? onLongPressRow,
+    TResult Function(_OnEnterPressed value)? onEnterPressed,
+    TResult Function(_EditRowDone value)? editRowDone,
     required TResult orElse(),
   }) {
     if (statementPressed != null) {
@@ -1272,12 +1414,15 @@ class _$_DeclarationPressed implements _DeclarationPressed {
     required TResult Function() init,
     required TResult Function() movePressed,
     required TResult Function(Sell sell) addNew,
-    required TResult Function(String fullname) addNewPerson,
-    required TResult Function(String fullname) selectPerson,
+    required TResult Function(Person person) addNewPerson,
+    required TResult Function(Person person) selectPerson,
     required TResult Function() closePressed,
     required TResult Function() statementPressed,
     required TResult Function() declarationPressed,
     required TResult Function() switchCurrentStateWindow,
+    required TResult Function(int index) onLongPressRow,
+    required TResult Function() onEnterPressed,
+    required TResult Function(Sell sell, int index) editRowDone,
   }) {
     return declarationPressed();
   }
@@ -1288,12 +1433,15 @@ class _$_DeclarationPressed implements _DeclarationPressed {
     TResult? Function()? init,
     TResult? Function()? movePressed,
     TResult? Function(Sell sell)? addNew,
-    TResult? Function(String fullname)? addNewPerson,
-    TResult? Function(String fullname)? selectPerson,
+    TResult? Function(Person person)? addNewPerson,
+    TResult? Function(Person person)? selectPerson,
     TResult? Function()? closePressed,
     TResult? Function()? statementPressed,
     TResult? Function()? declarationPressed,
     TResult? Function()? switchCurrentStateWindow,
+    TResult? Function(int index)? onLongPressRow,
+    TResult? Function()? onEnterPressed,
+    TResult? Function(Sell sell, int index)? editRowDone,
   }) {
     return declarationPressed?.call();
   }
@@ -1304,12 +1452,15 @@ class _$_DeclarationPressed implements _DeclarationPressed {
     TResult Function()? init,
     TResult Function()? movePressed,
     TResult Function(Sell sell)? addNew,
-    TResult Function(String fullname)? addNewPerson,
-    TResult Function(String fullname)? selectPerson,
+    TResult Function(Person person)? addNewPerson,
+    TResult Function(Person person)? selectPerson,
     TResult Function()? closePressed,
     TResult Function()? statementPressed,
     TResult Function()? declarationPressed,
     TResult Function()? switchCurrentStateWindow,
+    TResult Function(int index)? onLongPressRow,
+    TResult Function()? onEnterPressed,
+    TResult Function(Sell sell, int index)? editRowDone,
     required TResult orElse(),
   }) {
     if (declarationPressed != null) {
@@ -1331,6 +1482,9 @@ class _$_DeclarationPressed implements _DeclarationPressed {
     required TResult Function(_DeclarationPressed value) declarationPressed,
     required TResult Function(_SwitchCurrentStateWindow value)
         switchCurrentStateWindow,
+    required TResult Function(_OnLongPressRow value) onLongPressRow,
+    required TResult Function(_OnEnterPressed value) onEnterPressed,
+    required TResult Function(_EditRowDone value) editRowDone,
   }) {
     return declarationPressed(this);
   }
@@ -1348,6 +1502,9 @@ class _$_DeclarationPressed implements _DeclarationPressed {
     TResult? Function(_DeclarationPressed value)? declarationPressed,
     TResult? Function(_SwitchCurrentStateWindow value)?
         switchCurrentStateWindow,
+    TResult? Function(_OnLongPressRow value)? onLongPressRow,
+    TResult? Function(_OnEnterPressed value)? onEnterPressed,
+    TResult? Function(_EditRowDone value)? editRowDone,
   }) {
     return declarationPressed?.call(this);
   }
@@ -1364,6 +1521,9 @@ class _$_DeclarationPressed implements _DeclarationPressed {
     TResult Function(_StatementPressed value)? statementPressed,
     TResult Function(_DeclarationPressed value)? declarationPressed,
     TResult Function(_SwitchCurrentStateWindow value)? switchCurrentStateWindow,
+    TResult Function(_OnLongPressRow value)? onLongPressRow,
+    TResult Function(_OnEnterPressed value)? onEnterPressed,
+    TResult Function(_EditRowDone value)? editRowDone,
     required TResult orElse(),
   }) {
     if (declarationPressed != null) {
@@ -1420,12 +1580,15 @@ class _$_SwitchCurrentStateWindow implements _SwitchCurrentStateWindow {
     required TResult Function() init,
     required TResult Function() movePressed,
     required TResult Function(Sell sell) addNew,
-    required TResult Function(String fullname) addNewPerson,
-    required TResult Function(String fullname) selectPerson,
+    required TResult Function(Person person) addNewPerson,
+    required TResult Function(Person person) selectPerson,
     required TResult Function() closePressed,
     required TResult Function() statementPressed,
     required TResult Function() declarationPressed,
     required TResult Function() switchCurrentStateWindow,
+    required TResult Function(int index) onLongPressRow,
+    required TResult Function() onEnterPressed,
+    required TResult Function(Sell sell, int index) editRowDone,
   }) {
     return switchCurrentStateWindow();
   }
@@ -1436,12 +1599,15 @@ class _$_SwitchCurrentStateWindow implements _SwitchCurrentStateWindow {
     TResult? Function()? init,
     TResult? Function()? movePressed,
     TResult? Function(Sell sell)? addNew,
-    TResult? Function(String fullname)? addNewPerson,
-    TResult? Function(String fullname)? selectPerson,
+    TResult? Function(Person person)? addNewPerson,
+    TResult? Function(Person person)? selectPerson,
     TResult? Function()? closePressed,
     TResult? Function()? statementPressed,
     TResult? Function()? declarationPressed,
     TResult? Function()? switchCurrentStateWindow,
+    TResult? Function(int index)? onLongPressRow,
+    TResult? Function()? onEnterPressed,
+    TResult? Function(Sell sell, int index)? editRowDone,
   }) {
     return switchCurrentStateWindow?.call();
   }
@@ -1452,12 +1618,15 @@ class _$_SwitchCurrentStateWindow implements _SwitchCurrentStateWindow {
     TResult Function()? init,
     TResult Function()? movePressed,
     TResult Function(Sell sell)? addNew,
-    TResult Function(String fullname)? addNewPerson,
-    TResult Function(String fullname)? selectPerson,
+    TResult Function(Person person)? addNewPerson,
+    TResult Function(Person person)? selectPerson,
     TResult Function()? closePressed,
     TResult Function()? statementPressed,
     TResult Function()? declarationPressed,
     TResult Function()? switchCurrentStateWindow,
+    TResult Function(int index)? onLongPressRow,
+    TResult Function()? onEnterPressed,
+    TResult Function(Sell sell, int index)? editRowDone,
     required TResult orElse(),
   }) {
     if (switchCurrentStateWindow != null) {
@@ -1479,6 +1648,9 @@ class _$_SwitchCurrentStateWindow implements _SwitchCurrentStateWindow {
     required TResult Function(_DeclarationPressed value) declarationPressed,
     required TResult Function(_SwitchCurrentStateWindow value)
         switchCurrentStateWindow,
+    required TResult Function(_OnLongPressRow value) onLongPressRow,
+    required TResult Function(_OnEnterPressed value) onEnterPressed,
+    required TResult Function(_EditRowDone value) editRowDone,
   }) {
     return switchCurrentStateWindow(this);
   }
@@ -1496,6 +1668,9 @@ class _$_SwitchCurrentStateWindow implements _SwitchCurrentStateWindow {
     TResult? Function(_DeclarationPressed value)? declarationPressed,
     TResult? Function(_SwitchCurrentStateWindow value)?
         switchCurrentStateWindow,
+    TResult? Function(_OnLongPressRow value)? onLongPressRow,
+    TResult? Function(_OnEnterPressed value)? onEnterPressed,
+    TResult? Function(_EditRowDone value)? editRowDone,
   }) {
     return switchCurrentStateWindow?.call(this);
   }
@@ -1512,6 +1687,9 @@ class _$_SwitchCurrentStateWindow implements _SwitchCurrentStateWindow {
     TResult Function(_StatementPressed value)? statementPressed,
     TResult Function(_DeclarationPressed value)? declarationPressed,
     TResult Function(_SwitchCurrentStateWindow value)? switchCurrentStateWindow,
+    TResult Function(_OnLongPressRow value)? onLongPressRow,
+    TResult Function(_OnEnterPressed value)? onEnterPressed,
+    TResult Function(_EditRowDone value)? editRowDone,
     required TResult orElse(),
   }) {
     if (switchCurrentStateWindow != null) {
@@ -1526,13 +1704,576 @@ abstract class _SwitchCurrentStateWindow implements TableEvent {
 }
 
 /// @nodoc
+abstract class _$$_OnLongPressRowCopyWith<$Res> {
+  factory _$$_OnLongPressRowCopyWith(
+          _$_OnLongPressRow value, $Res Function(_$_OnLongPressRow) then) =
+      __$$_OnLongPressRowCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int index});
+}
+
+/// @nodoc
+class __$$_OnLongPressRowCopyWithImpl<$Res>
+    extends _$TableEventCopyWithImpl<$Res, _$_OnLongPressRow>
+    implements _$$_OnLongPressRowCopyWith<$Res> {
+  __$$_OnLongPressRowCopyWithImpl(
+      _$_OnLongPressRow _value, $Res Function(_$_OnLongPressRow) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? index = null,
+  }) {
+    return _then(_$_OnLongPressRow(
+      null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_OnLongPressRow implements _OnLongPressRow {
+  const _$_OnLongPressRow(this.index);
+
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'TableEvent.onLongPressRow(index: $index)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_OnLongPressRow &&
+            (identical(other.index, index) || other.index == index));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, index);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_OnLongPressRowCopyWith<_$_OnLongPressRow> get copyWith =>
+      __$$_OnLongPressRowCopyWithImpl<_$_OnLongPressRow>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() movePressed,
+    required TResult Function(Sell sell) addNew,
+    required TResult Function(Person person) addNewPerson,
+    required TResult Function(Person person) selectPerson,
+    required TResult Function() closePressed,
+    required TResult Function() statementPressed,
+    required TResult Function() declarationPressed,
+    required TResult Function() switchCurrentStateWindow,
+    required TResult Function(int index) onLongPressRow,
+    required TResult Function() onEnterPressed,
+    required TResult Function(Sell sell, int index) editRowDone,
+  }) {
+    return onLongPressRow(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? movePressed,
+    TResult? Function(Sell sell)? addNew,
+    TResult? Function(Person person)? addNewPerson,
+    TResult? Function(Person person)? selectPerson,
+    TResult? Function()? closePressed,
+    TResult? Function()? statementPressed,
+    TResult? Function()? declarationPressed,
+    TResult? Function()? switchCurrentStateWindow,
+    TResult? Function(int index)? onLongPressRow,
+    TResult? Function()? onEnterPressed,
+    TResult? Function(Sell sell, int index)? editRowDone,
+  }) {
+    return onLongPressRow?.call(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? movePressed,
+    TResult Function(Sell sell)? addNew,
+    TResult Function(Person person)? addNewPerson,
+    TResult Function(Person person)? selectPerson,
+    TResult Function()? closePressed,
+    TResult Function()? statementPressed,
+    TResult Function()? declarationPressed,
+    TResult Function()? switchCurrentStateWindow,
+    TResult Function(int index)? onLongPressRow,
+    TResult Function()? onEnterPressed,
+    TResult Function(Sell sell, int index)? editRowDone,
+    required TResult orElse(),
+  }) {
+    if (onLongPressRow != null) {
+      return onLongPressRow(index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_MovePressed value) movePressed,
+    required TResult Function(_AddNew value) addNew,
+    required TResult Function(_AddNewPerson value) addNewPerson,
+    required TResult Function(_SelectPerson value) selectPerson,
+    required TResult Function(_ClosePressed value) closePressed,
+    required TResult Function(_StatementPressed value) statementPressed,
+    required TResult Function(_DeclarationPressed value) declarationPressed,
+    required TResult Function(_SwitchCurrentStateWindow value)
+        switchCurrentStateWindow,
+    required TResult Function(_OnLongPressRow value) onLongPressRow,
+    required TResult Function(_OnEnterPressed value) onEnterPressed,
+    required TResult Function(_EditRowDone value) editRowDone,
+  }) {
+    return onLongPressRow(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_MovePressed value)? movePressed,
+    TResult? Function(_AddNew value)? addNew,
+    TResult? Function(_AddNewPerson value)? addNewPerson,
+    TResult? Function(_SelectPerson value)? selectPerson,
+    TResult? Function(_ClosePressed value)? closePressed,
+    TResult? Function(_StatementPressed value)? statementPressed,
+    TResult? Function(_DeclarationPressed value)? declarationPressed,
+    TResult? Function(_SwitchCurrentStateWindow value)?
+        switchCurrentStateWindow,
+    TResult? Function(_OnLongPressRow value)? onLongPressRow,
+    TResult? Function(_OnEnterPressed value)? onEnterPressed,
+    TResult? Function(_EditRowDone value)? editRowDone,
+  }) {
+    return onLongPressRow?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_MovePressed value)? movePressed,
+    TResult Function(_AddNew value)? addNew,
+    TResult Function(_AddNewPerson value)? addNewPerson,
+    TResult Function(_SelectPerson value)? selectPerson,
+    TResult Function(_ClosePressed value)? closePressed,
+    TResult Function(_StatementPressed value)? statementPressed,
+    TResult Function(_DeclarationPressed value)? declarationPressed,
+    TResult Function(_SwitchCurrentStateWindow value)? switchCurrentStateWindow,
+    TResult Function(_OnLongPressRow value)? onLongPressRow,
+    TResult Function(_OnEnterPressed value)? onEnterPressed,
+    TResult Function(_EditRowDone value)? editRowDone,
+    required TResult orElse(),
+  }) {
+    if (onLongPressRow != null) {
+      return onLongPressRow(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnLongPressRow implements TableEvent {
+  const factory _OnLongPressRow(final int index) = _$_OnLongPressRow;
+
+  int get index;
+  @JsonKey(ignore: true)
+  _$$_OnLongPressRowCopyWith<_$_OnLongPressRow> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_OnEnterPressedCopyWith<$Res> {
+  factory _$$_OnEnterPressedCopyWith(
+          _$_OnEnterPressed value, $Res Function(_$_OnEnterPressed) then) =
+      __$$_OnEnterPressedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_OnEnterPressedCopyWithImpl<$Res>
+    extends _$TableEventCopyWithImpl<$Res, _$_OnEnterPressed>
+    implements _$$_OnEnterPressedCopyWith<$Res> {
+  __$$_OnEnterPressedCopyWithImpl(
+      _$_OnEnterPressed _value, $Res Function(_$_OnEnterPressed) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_OnEnterPressed implements _OnEnterPressed {
+  const _$_OnEnterPressed();
+
+  @override
+  String toString() {
+    return 'TableEvent.onEnterPressed()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_OnEnterPressed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() movePressed,
+    required TResult Function(Sell sell) addNew,
+    required TResult Function(Person person) addNewPerson,
+    required TResult Function(Person person) selectPerson,
+    required TResult Function() closePressed,
+    required TResult Function() statementPressed,
+    required TResult Function() declarationPressed,
+    required TResult Function() switchCurrentStateWindow,
+    required TResult Function(int index) onLongPressRow,
+    required TResult Function() onEnterPressed,
+    required TResult Function(Sell sell, int index) editRowDone,
+  }) {
+    return onEnterPressed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? movePressed,
+    TResult? Function(Sell sell)? addNew,
+    TResult? Function(Person person)? addNewPerson,
+    TResult? Function(Person person)? selectPerson,
+    TResult? Function()? closePressed,
+    TResult? Function()? statementPressed,
+    TResult? Function()? declarationPressed,
+    TResult? Function()? switchCurrentStateWindow,
+    TResult? Function(int index)? onLongPressRow,
+    TResult? Function()? onEnterPressed,
+    TResult? Function(Sell sell, int index)? editRowDone,
+  }) {
+    return onEnterPressed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? movePressed,
+    TResult Function(Sell sell)? addNew,
+    TResult Function(Person person)? addNewPerson,
+    TResult Function(Person person)? selectPerson,
+    TResult Function()? closePressed,
+    TResult Function()? statementPressed,
+    TResult Function()? declarationPressed,
+    TResult Function()? switchCurrentStateWindow,
+    TResult Function(int index)? onLongPressRow,
+    TResult Function()? onEnterPressed,
+    TResult Function(Sell sell, int index)? editRowDone,
+    required TResult orElse(),
+  }) {
+    if (onEnterPressed != null) {
+      return onEnterPressed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_MovePressed value) movePressed,
+    required TResult Function(_AddNew value) addNew,
+    required TResult Function(_AddNewPerson value) addNewPerson,
+    required TResult Function(_SelectPerson value) selectPerson,
+    required TResult Function(_ClosePressed value) closePressed,
+    required TResult Function(_StatementPressed value) statementPressed,
+    required TResult Function(_DeclarationPressed value) declarationPressed,
+    required TResult Function(_SwitchCurrentStateWindow value)
+        switchCurrentStateWindow,
+    required TResult Function(_OnLongPressRow value) onLongPressRow,
+    required TResult Function(_OnEnterPressed value) onEnterPressed,
+    required TResult Function(_EditRowDone value) editRowDone,
+  }) {
+    return onEnterPressed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_MovePressed value)? movePressed,
+    TResult? Function(_AddNew value)? addNew,
+    TResult? Function(_AddNewPerson value)? addNewPerson,
+    TResult? Function(_SelectPerson value)? selectPerson,
+    TResult? Function(_ClosePressed value)? closePressed,
+    TResult? Function(_StatementPressed value)? statementPressed,
+    TResult? Function(_DeclarationPressed value)? declarationPressed,
+    TResult? Function(_SwitchCurrentStateWindow value)?
+        switchCurrentStateWindow,
+    TResult? Function(_OnLongPressRow value)? onLongPressRow,
+    TResult? Function(_OnEnterPressed value)? onEnterPressed,
+    TResult? Function(_EditRowDone value)? editRowDone,
+  }) {
+    return onEnterPressed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_MovePressed value)? movePressed,
+    TResult Function(_AddNew value)? addNew,
+    TResult Function(_AddNewPerson value)? addNewPerson,
+    TResult Function(_SelectPerson value)? selectPerson,
+    TResult Function(_ClosePressed value)? closePressed,
+    TResult Function(_StatementPressed value)? statementPressed,
+    TResult Function(_DeclarationPressed value)? declarationPressed,
+    TResult Function(_SwitchCurrentStateWindow value)? switchCurrentStateWindow,
+    TResult Function(_OnLongPressRow value)? onLongPressRow,
+    TResult Function(_OnEnterPressed value)? onEnterPressed,
+    TResult Function(_EditRowDone value)? editRowDone,
+    required TResult orElse(),
+  }) {
+    if (onEnterPressed != null) {
+      return onEnterPressed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnEnterPressed implements TableEvent {
+  const factory _OnEnterPressed() = _$_OnEnterPressed;
+}
+
+/// @nodoc
+abstract class _$$_EditRowDoneCopyWith<$Res> {
+  factory _$$_EditRowDoneCopyWith(
+          _$_EditRowDone value, $Res Function(_$_EditRowDone) then) =
+      __$$_EditRowDoneCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Sell sell, int index});
+}
+
+/// @nodoc
+class __$$_EditRowDoneCopyWithImpl<$Res>
+    extends _$TableEventCopyWithImpl<$Res, _$_EditRowDone>
+    implements _$$_EditRowDoneCopyWith<$Res> {
+  __$$_EditRowDoneCopyWithImpl(
+      _$_EditRowDone _value, $Res Function(_$_EditRowDone) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? sell = null,
+    Object? index = null,
+  }) {
+    return _then(_$_EditRowDone(
+      null == sell
+          ? _value.sell
+          : sell // ignore: cast_nullable_to_non_nullable
+              as Sell,
+      null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_EditRowDone implements _EditRowDone {
+  const _$_EditRowDone(this.sell, this.index);
+
+  @override
+  final Sell sell;
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'TableEvent.editRowDone(sell: $sell, index: $index)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_EditRowDone &&
+            (identical(other.sell, sell) || other.sell == sell) &&
+            (identical(other.index, index) || other.index == index));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, sell, index);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_EditRowDoneCopyWith<_$_EditRowDone> get copyWith =>
+      __$$_EditRowDoneCopyWithImpl<_$_EditRowDone>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() movePressed,
+    required TResult Function(Sell sell) addNew,
+    required TResult Function(Person person) addNewPerson,
+    required TResult Function(Person person) selectPerson,
+    required TResult Function() closePressed,
+    required TResult Function() statementPressed,
+    required TResult Function() declarationPressed,
+    required TResult Function() switchCurrentStateWindow,
+    required TResult Function(int index) onLongPressRow,
+    required TResult Function() onEnterPressed,
+    required TResult Function(Sell sell, int index) editRowDone,
+  }) {
+    return editRowDone(sell, index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? movePressed,
+    TResult? Function(Sell sell)? addNew,
+    TResult? Function(Person person)? addNewPerson,
+    TResult? Function(Person person)? selectPerson,
+    TResult? Function()? closePressed,
+    TResult? Function()? statementPressed,
+    TResult? Function()? declarationPressed,
+    TResult? Function()? switchCurrentStateWindow,
+    TResult? Function(int index)? onLongPressRow,
+    TResult? Function()? onEnterPressed,
+    TResult? Function(Sell sell, int index)? editRowDone,
+  }) {
+    return editRowDone?.call(sell, index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? movePressed,
+    TResult Function(Sell sell)? addNew,
+    TResult Function(Person person)? addNewPerson,
+    TResult Function(Person person)? selectPerson,
+    TResult Function()? closePressed,
+    TResult Function()? statementPressed,
+    TResult Function()? declarationPressed,
+    TResult Function()? switchCurrentStateWindow,
+    TResult Function(int index)? onLongPressRow,
+    TResult Function()? onEnterPressed,
+    TResult Function(Sell sell, int index)? editRowDone,
+    required TResult orElse(),
+  }) {
+    if (editRowDone != null) {
+      return editRowDone(sell, index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_MovePressed value) movePressed,
+    required TResult Function(_AddNew value) addNew,
+    required TResult Function(_AddNewPerson value) addNewPerson,
+    required TResult Function(_SelectPerson value) selectPerson,
+    required TResult Function(_ClosePressed value) closePressed,
+    required TResult Function(_StatementPressed value) statementPressed,
+    required TResult Function(_DeclarationPressed value) declarationPressed,
+    required TResult Function(_SwitchCurrentStateWindow value)
+        switchCurrentStateWindow,
+    required TResult Function(_OnLongPressRow value) onLongPressRow,
+    required TResult Function(_OnEnterPressed value) onEnterPressed,
+    required TResult Function(_EditRowDone value) editRowDone,
+  }) {
+    return editRowDone(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_MovePressed value)? movePressed,
+    TResult? Function(_AddNew value)? addNew,
+    TResult? Function(_AddNewPerson value)? addNewPerson,
+    TResult? Function(_SelectPerson value)? selectPerson,
+    TResult? Function(_ClosePressed value)? closePressed,
+    TResult? Function(_StatementPressed value)? statementPressed,
+    TResult? Function(_DeclarationPressed value)? declarationPressed,
+    TResult? Function(_SwitchCurrentStateWindow value)?
+        switchCurrentStateWindow,
+    TResult? Function(_OnLongPressRow value)? onLongPressRow,
+    TResult? Function(_OnEnterPressed value)? onEnterPressed,
+    TResult? Function(_EditRowDone value)? editRowDone,
+  }) {
+    return editRowDone?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_MovePressed value)? movePressed,
+    TResult Function(_AddNew value)? addNew,
+    TResult Function(_AddNewPerson value)? addNewPerson,
+    TResult Function(_SelectPerson value)? selectPerson,
+    TResult Function(_ClosePressed value)? closePressed,
+    TResult Function(_StatementPressed value)? statementPressed,
+    TResult Function(_DeclarationPressed value)? declarationPressed,
+    TResult Function(_SwitchCurrentStateWindow value)? switchCurrentStateWindow,
+    TResult Function(_OnLongPressRow value)? onLongPressRow,
+    TResult Function(_OnEnterPressed value)? onEnterPressed,
+    TResult Function(_EditRowDone value)? editRowDone,
+    required TResult orElse(),
+  }) {
+    if (editRowDone != null) {
+      return editRowDone(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EditRowDone implements TableEvent {
+  const factory _EditRowDone(final Sell sell, final int index) = _$_EditRowDone;
+
+  Sell get sell;
+  int get index;
+  @JsonKey(ignore: true)
+  _$$_EditRowDoneCopyWith<_$_EditRowDone> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$TableState {
   BlocAction? get action => throw _privateConstructorUsedError;
   MainAxisAlignment get axisCurrent => throw _privateConstructorUsedError;
   bool get leftButtonActive => throw _privateConstructorUsedError;
   bool get rightButtonActive => throw _privateConstructorUsedError;
   Duration get duration => throw _privateConstructorUsedError;
-  String? get selectedPerson => throw _privateConstructorUsedError;
+  Person? get selectedPerson => throw _privateConstructorUsedError;
   List<Sell> get sells => throw _privateConstructorUsedError;
   List<Person> get persons => throw _privateConstructorUsedError;
   CurrentStateWindow get currentStateWindow =>
@@ -1557,7 +2298,7 @@ abstract class $TableStateCopyWith<$Res> {
       bool leftButtonActive,
       bool rightButtonActive,
       Duration duration,
-      String? selectedPerson,
+      Person? selectedPerson,
       List<Sell> sells,
       List<Person> persons,
       CurrentStateWindow currentStateWindow,
@@ -1614,7 +2355,7 @@ class _$TableStateCopyWithImpl<$Res, $Val extends TableState>
       selectedPerson: freezed == selectedPerson
           ? _value.selectedPerson
           : selectedPerson // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Person?,
       sells: null == sells
           ? _value.sells
           : sells // ignore: cast_nullable_to_non_nullable
@@ -1653,7 +2394,7 @@ abstract class _$$_StartStateCopyWith<$Res>
       bool leftButtonActive,
       bool rightButtonActive,
       Duration duration,
-      String? selectedPerson,
+      Person? selectedPerson,
       List<Sell> sells,
       List<Person> persons,
       CurrentStateWindow currentStateWindow,
@@ -1708,7 +2449,7 @@ class __$$_StartStateCopyWithImpl<$Res>
       selectedPerson: freezed == selectedPerson
           ? _value.selectedPerson
           : selectedPerson // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Person?,
       sells: null == sells
           ? _value._sells
           : sells // ignore: cast_nullable_to_non_nullable
@@ -1767,7 +2508,7 @@ class _$_StartState implements _StartState {
   final Duration duration;
   @override
   @JsonKey()
-  final String? selectedPerson;
+  final Person? selectedPerson;
   final List<Sell> _sells;
   @override
   @JsonKey()
@@ -1857,7 +2598,7 @@ abstract class _StartState implements TableState {
       final bool leftButtonActive,
       final bool rightButtonActive,
       final Duration duration,
-      final String? selectedPerson,
+      final Person? selectedPerson,
       final List<Sell> sells,
       final List<Person> persons,
       final CurrentStateWindow currentStateWindow,
@@ -1875,7 +2616,7 @@ abstract class _StartState implements TableState {
   @override
   Duration get duration;
   @override
-  String? get selectedPerson;
+  Person? get selectedPerson;
   @override
   List<Sell> get sells;
   @override

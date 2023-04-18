@@ -8,7 +8,7 @@ class TableState extends BaseBlocState with _$TableState {
     @Default(false) bool leftButtonActive,
     @Default(true) bool rightButtonActive,
     @Default(Duration(seconds: 1)) Duration duration,
-    @Default(null) String? selectedPerson,
+    @Default(null) Person? selectedPerson,
     @Default([]) List<Sell> sells,
     @Default([]) List<Person> persons,
     @Default(CurrentStateWindow.active) CurrentStateWindow currentStateWindow,
