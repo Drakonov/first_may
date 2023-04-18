@@ -1,0 +1,1 @@
+enum SearchType { byNickname, byCity }

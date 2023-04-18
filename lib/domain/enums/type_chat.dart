@@ -1,0 +1,1 @@
+enum TypeChat { generalChat, privateChat }

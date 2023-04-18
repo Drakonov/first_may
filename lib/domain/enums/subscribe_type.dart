@@ -1,0 +1,1 @@
+enum SubscribeType { week, month }
