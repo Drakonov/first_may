@@ -6,6 +6,7 @@ import 'package:first_may/app/navigation/app_router.dart';
 import 'package:first_may/core/bloc/base_bloc_state.dart';
 import 'package:first_may/core/bloc/bloc_action.dart';
 import 'package:first_may/core/utils/excel/myExcel.dart';
+import 'package:first_may/data/gateways/remote/remote_repository.dart';
 import 'package:first_may/domain/enums/current_state_window.dart';
 import 'package:first_may/model/person.dart';
 import 'package:first_may/model/sells.dart';
@@ -45,16 +46,17 @@ class TableBloc extends Bloc<TableEvent, TableState> {
     sells.addAll(Sells.fromJson(testData).sells);
 
     for (var item in state.persons) {
-      persons.add(item.fullname);
+      persons.add(item.fullName);
     }
 
     for (var item in Sells.fromJson(testData).sells) {
-      persons.add(item.fullname);
+      persons.add(item.fullName);
     }
 
-    for (var item in persons) {
-      personsList.add(Person(fullname: item));
-    }
+    personsList.addAll(await RemoteRepository.getPersons());
+    //for (var item in persons) {
+    //  personsList.add(Person(fullname: item));
+    //}
     emit(state.copyWith(sells: sells, persons: personsList));
   }
 

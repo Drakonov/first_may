@@ -51,13 +51,13 @@ class Sells {
 
 class Sell {
   Sell({
-    required this.fullname,
-    required this.summ,
+    required this.fullName,
+    required this.sum,
     required this.date,
   });
 
-  final String fullname;
-  final double summ;
+  final String fullName;
+  final double sum;
   final DateTime date;
 
   factory Sell.fromRawJson(String str) => Sell.fromJson(json.decode(str));
@@ -65,14 +65,14 @@ class Sell {
   String toRawJson() => json.encode(toJson());
 
   factory Sell.fromJson(Map<String, dynamic> json) => Sell(
-        fullname: json["fullname"],
-        summ: json["summ"]?.toDouble(),
+        fullName: json["fullname"],
+        sum: json["summ"]?.toDouble(),
         date: DateTime.parse(json["date"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "fullname": fullname,
-        "summ": summ,
+        "fullname": fullName,
+        "summ": sum,
         "date": date.toIso8601String(),
       };
 }

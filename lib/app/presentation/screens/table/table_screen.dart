@@ -7,6 +7,7 @@ import 'package:first_may/core/utils/context_extensions.dart';
 import 'package:first_may/domain/enums/current_state_window.dart';
 import 'package:first_may/model/person.dart';
 import 'package:first_may/model/sells.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -131,8 +132,8 @@ class _TableScreenState extends State<TableScreen> {
               context.sendEvent<TableBloc>(
                 TableEvent.addNew(
                   Sell(
-                    fullname: state.selectedPerson!.fullname,
-                    summ: double.parse(_summController.text),
+                    fullName: state.selectedPerson!.fullName,
+                    sum: double.parse(_summController.text),
                     date: DateTime.now(),
                   ),
                 ),
@@ -160,8 +161,8 @@ class _TableScreenState extends State<TableScreen> {
               context.sendEvent<TableBloc>(
                 TableEvent.addNew(
                   Sell(
-                    fullname: state.selectedPerson!.fullname,
-                    summ: double.parse(_summController.text),
+                    fullName: state.selectedPerson!.fullName,
+                    sum: double.parse(_summController.text),
                     date: DateTime.now(),
                   ),
                 ),
@@ -190,16 +191,16 @@ class _TableScreenState extends State<TableScreen> {
                 actions: [
                   TextButton(
                     onPressed: () {
-                      if (controller.text.isNotEmpty) {
-                        context.sendEvent<TableBloc>(
-                          TableEvent.addNewPerson(
-                            Person(
-                              fullname: controller.text,
-                            ),
-                          ),
-                        );
-                        Navigator.pop(context, true);
-                      }
+                      //if (controller.text.isNotEmpty) {
+                      //  context.sendEvent<TableBloc>(
+                      //    TableEvent.addNewPerson(
+                      //      Person(
+                      //        fullName: controller.text,
+                      //      ),
+                      //    ),
+                      //  );
+                      //  Navigator.pop(context, true);
+                      //}
                     },
                     child: const Text("Добавить"),
                   )
@@ -222,8 +223,13 @@ class _TableScreenState extends State<TableScreen> {
           builder: (context, state) {
             return DropdownSearch<Person>(
               selectedItem: state.selectedPerson,
-              popupProps: const PopupProps.menu(
-                searchFieldProps: TextFieldProps(
+              popupProps: PopupProps.menu(
+                emptyBuilder: (context, string) => Container(
+                  height: 70,
+                  alignment: Alignment.center,
+                  child: const Text('Пользователь не найден'),
+                ),
+                searchFieldProps: const TextFieldProps(
                   autofocus: true,
                 ),
                 showSearchBox: true,
@@ -233,7 +239,7 @@ class _TableScreenState extends State<TableScreen> {
                 baseStyle: TextStyle(fontSize: 16),
                 dropdownSearchDecoration: InputDecoration(labelText: 'ФИО'),
               ),
-              itemAsString: (Person u) => u.fullname,
+              itemAsString: (Person u) => '${u.serviceNumber} ${u.fullName}',
               onChanged: (Person? person) {
                 //FocusScope.of(context).requestFocus(FocusNode());
 
@@ -241,7 +247,9 @@ class _TableScreenState extends State<TableScreen> {
                   context.sendEvent<TableBloc>(TableEvent.selectPerson(person));
                 }
                 _focusNode.requestFocus();
-                print(person?.fullname);
+                if (kDebugMode) {
+                  print(person?.fullName);
+                }
               },
             );
           },
@@ -311,7 +319,7 @@ class _TableScreenState extends State<TableScreen> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text('Ок'),
+          child: const Text('Ок'),
         ),
       ],
     );
@@ -327,22 +335,22 @@ class _TableScreenState extends State<TableScreen> {
 
   showEditModal(BuildContext contextExternal, TableState state, int index) {
     // set up the AlertDialog
-    TextEditingController summController = TextEditingController();
-    summController.text = state.sells[index].summ.toString();
-    Person? _person;
+    TextEditingController sumController = TextEditingController();
+    sumController.text = state.sells[index].sum.toString();
+    Person? person;
     for (var item in state.persons) {
-      if (item.fullname == state.sells[index].fullname) {
-        _person = item;
+      if (item.fullName == state.sells[index].fullName) {
+        person = item;
         break;
       }
     }
     AlertDialog alert = AlertDialog(
       title: const Text('Изменение данных по продаже'),
       content: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
         children: [
           DropdownSearch<Person>(
-            selectedItem: _person,
+            selectedItem: person,
             popupProps: const PopupProps.menu(
               searchFieldProps: TextFieldProps(
                 autofocus: true,
@@ -354,21 +362,23 @@ class _TableScreenState extends State<TableScreen> {
               baseStyle: TextStyle(fontSize: 16),
               dropdownSearchDecoration: InputDecoration(labelText: 'ФИО'),
             ),
-            itemAsString: (Person u) => u.fullname,
+            itemAsString: (Person u) => '${u.serviceNumber} ${u.fullName}',
             onChanged: (Person? person) {
               //FocusScope.of(context).requestFocus(FocusNode());
 
               if (person != null) {
-                _person = person;
+                person = person;
               }
               _focusNode2.requestFocus();
-              print(person?.fullname);
+              if (kDebugMode) {
+                print(person?.fullName);
+              }
             },
           ),
           TextField(
             autofocus: false,
             focusNode: _focusNode2,
-            controller: summController,
+            controller: sumController,
             inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*\.?\d{0,2})'))],
             decoration: const InputDecoration(hintText: 'Сумма'),
           ),
@@ -381,8 +391,8 @@ class _TableScreenState extends State<TableScreen> {
             contextExternal.sendEvent<TableBloc>(
               TableEvent.editRowDone(
                 Sell(
-                  fullname: _person!.fullname,
-                  summ: double.parse(summController.text),
+                  fullName: person!.fullName,
+                  sum: double.parse(sumController.text),
                   date: state.sells[index].date,
                 ),
                 index,

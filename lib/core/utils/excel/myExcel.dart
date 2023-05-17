@@ -29,13 +29,13 @@ class ExcelHelper {
             rowIndex: colIterableSheet.maxRows,
             columnIndex: colIndex,
           ))
-          .value = colValue.fullname;
+          .value = colValue.fullName;
       colIterableSheet
           .cell(CellIndex.indexByColumnRow(
             rowIndex: colIterableSheet.maxRows - 1,
             columnIndex: colIndex + 1,
           ))
-          .value = colValue.summ;
+          .value = colValue.sum;
       colIterableSheet
           .cell(CellIndex.indexByColumnRow(
             rowIndex: colIterableSheet.maxRows - 1,
