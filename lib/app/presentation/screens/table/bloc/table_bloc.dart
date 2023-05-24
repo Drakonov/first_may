@@ -40,24 +40,19 @@ class TableBloc extends Bloc<TableEvent, TableState> {
     _Init event,
     Emitter<TableState> emit,
   ) async {
+    emit(state.copyWith(loading: true));
     List<Sell> sells = [];
     Set<String> persons = {};
     List<Person> personsList = [];
-    sells.addAll(Sells.fromJson(testData).sells);
 
     for (var item in state.persons) {
       persons.add(item.fullName);
     }
 
-    for (var item in Sells.fromJson(testData).sells) {
-      persons.add(item.fullName);
-    }
-
     personsList.addAll(await RemoteRepository.getPersons());
-    //for (var item in persons) {
-    //  personsList.add(Person(fullname: item));
-    //}
-    emit(state.copyWith(sells: sells, persons: personsList));
+    sells.addAll(await RemoteRepository.getSells());
+
+    emit(state.copyWith(sells: sells, persons: personsList, loading: false));
   }
 
   FutureOr<void> _switchCurrentStateWindow(_SwitchCurrentStateWindow event, Emitter<TableState> emit) {
@@ -94,17 +89,18 @@ class TableBloc extends Bloc<TableEvent, TableState> {
     emit(state.copyWith(selectedPerson: event.person));
   }
 
-  FutureOr<void> _addNew(_AddNew event, Emitter<TableState> emit) {
+  FutureOr<void> _addNew(_AddNew event, Emitter<TableState> emit) async {
+    emit(state.copyWith(loading: true));
+    await RemoteRepository.addSell(event.sell);
     List<Sell> sells = [];
-    sells.addAll(state.sells);
-    sells.add(event.sell);
-    emit(state.copyWith(sells: sells, selectedPerson: null));
+    sells.addAll(await RemoteRepository.getSells());
+    emit(state.copyWith(sells: sells, selectedPerson: null, loading: false));
     add(const TableEvent.switchCurrentStateWindow());
   }
 
   Future<FutureOr<void>> _statementPressed(_StatementPressed event, Emitter<TableState> emit) async {
     String path = "/xls/r.xlsx";
-    ExcelHelper.createExcelFromSells(sells: Sells(sells: state.sells), path: path);
+    ExcelHelper.createExcelFromSells(sells: state.sells, path: path);
     print('file create');
     emit(state.copyWith(action: ShowStatementDone()));
   }
@@ -117,11 +113,14 @@ class TableBloc extends Bloc<TableEvent, TableState> {
     emit(state.copyWith(action: ShowEditingModal(event.index)));
   }
 
-  FutureOr<void> _onEditRowDone(_EditRowDone event, Emitter<TableState> emit) {
+  Future<FutureOr<void>> _onEditRowDone(_EditRowDone event, Emitter<TableState> emit) async {
+    emit(state.copyWith(loading: true));
     List<Sell> sells = [];
-    sells.addAll(state.sells);
-    sells.removeAt(event.index);
-    sells.insert(event.index, event.sell);
-    emit(state.copyWith(sells: sells, selectedPerson: null));
+    try {
+      await RemoteRepository.updateSell(event.sell);
+      sells.addAll(await RemoteRepository.getSells());
+    } catch (e) {}
+
+    emit(state.copyWith(sells: sells, selectedPerson: null, loading: false));
   }
 }

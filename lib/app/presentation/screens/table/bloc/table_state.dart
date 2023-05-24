@@ -4,6 +4,7 @@ part of 'table_bloc.dart';
 class TableState extends BaseBlocState with _$TableState {
   factory TableState({
     BlocAction? action,
+    @Default(true) bool loading,
     @Default(MainAxisAlignment.start) MainAxisAlignment axisCurrent,
     @Default(false) bool leftButtonActive,
     @Default(true) bool rightButtonActive,

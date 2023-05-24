@@ -24,7 +24,7 @@ class TableEvent with _$TableEvent {
 
   const factory TableEvent.onEnterPressed() = _OnEnterPressed;
 
-  const factory TableEvent.editRowDone(Sell sell, int index) = _EditRowDone;
+  const factory TableEvent.editRowDone(Sell sell, int index,Person person) = _EditRowDone;
 }
 
 class ShowStatementDone extends BlocAction {}

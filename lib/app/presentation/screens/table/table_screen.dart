@@ -65,7 +65,8 @@ class _TableScreenState extends State<TableScreen> {
                             Expanded(
                               child: buildTable(),
                             ),
-                            buildBottomButtons(context)
+                            const SizedBox(height: 20),
+                            //buildBottomButtons(context)
                           ],
                         );
                       case CurrentStateWindow.minimize:
@@ -107,18 +108,25 @@ class _TableScreenState extends State<TableScreen> {
   }
 
   Widget buildAppBar(BuildContext context, TableState state) {
-    return Row(
-      children: [
-        //const SizedBox(width: 5),
-        //buildAddNewPersonButton(context),
-        const SizedBox(width: 35),
-        buildDropDown(state, context),
-        const SizedBox(width: 20),
-        buildTextFieldSumm(),
-        const SizedBox(width: 20),
-        buildAddNewSaleButton(context),
-        const SizedBox(width: 20),
-      ],
+    return BlocBuilder<TableBloc, TableState>(
+      builder: (context, state) {
+        if (state.loading == true) {
+          return const SizedBox();
+        }
+        return Row(
+          children: [
+            //const SizedBox(width: 5),
+            //buildAddNewPersonButton(context),
+            const SizedBox(width: 35),
+            buildDropDown(state, context),
+            const SizedBox(width: 20),
+            buildTextFieldSumm(),
+            const SizedBox(width: 20),
+            buildAddNewSaleButton(context),
+            const SizedBox(width: 20),
+          ],
+        );
+      },
     );
   }
 
@@ -132,9 +140,9 @@ class _TableScreenState extends State<TableScreen> {
               context.sendEvent<TableBloc>(
                 TableEvent.addNew(
                   Sell(
-                    fullName: state.selectedPerson!.fullName,
+                    person: state.selectedPerson!,
                     sum: double.parse(_summController.text),
-                    date: DateTime.now(),
+                    dateSell: DateTime.now(),
                   ),
                 ),
               );
@@ -161,9 +169,9 @@ class _TableScreenState extends State<TableScreen> {
               context.sendEvent<TableBloc>(
                 TableEvent.addNew(
                   Sell(
-                    fullName: state.selectedPerson!.fullName,
+                    person: state.selectedPerson!,
                     sum: double.parse(_summController.text),
-                    date: DateTime.now(),
+                    dateSell: DateTime.now(),
                   ),
                 ),
               );
@@ -215,53 +223,60 @@ class _TableScreenState extends State<TableScreen> {
   Widget buildDropDown(TableState state, BuildContext context) {
     return Expanded(
       flex: 2,
-      child: Focus(
-        autofocus: true,
-        child: BlocBuilder<TableBloc, TableState>(
-          buildWhen: (previous, current) =>
-              previous.persons != current.persons || previous.selectedPerson != current.selectedPerson,
-          builder: (context, state) {
-            return DropdownSearch<Person>(
-              selectedItem: state.selectedPerson,
-              popupProps: PopupProps.menu(
-                emptyBuilder: (context, string) => Container(
-                  height: 70,
-                  alignment: Alignment.center,
-                  child: const Text('Пользователь не найден'),
-                ),
-                searchFieldProps: const TextFieldProps(
-                  autofocus: true,
-                ),
-                showSearchBox: true,
+      child: BlocBuilder<TableBloc, TableState>(
+        buildWhen: (previous, current) =>
+            previous.persons != current.persons || previous.selectedPerson != current.selectedPerson,
+        builder: (context, state) {
+          return DropdownSearch<Person>(
+            selectedItem: state.selectedPerson,
+            popupProps: PopupProps.menu(
+              emptyBuilder: (context, string) => Container(
+                height: 70,
+                alignment: Alignment.center,
+                child: const Text('Пользователь не найден'),
               ),
-              items: state.persons,
-              dropdownDecoratorProps: const DropDownDecoratorProps(
-                baseStyle: TextStyle(fontSize: 16),
-                dropdownSearchDecoration: InputDecoration(labelText: 'ФИО'),
+              searchFieldProps: const TextFieldProps(
+                autofocus: true,
               ),
-              itemAsString: (Person u) => '${u.serviceNumber} ${u.fullName}',
-              onChanged: (Person? person) {
-                //FocusScope.of(context).requestFocus(FocusNode());
+              showSearchBox: true,
+            ),
+            items: state.persons,
+            dropdownDecoratorProps: const DropDownDecoratorProps(
+              baseStyle: TextStyle(fontSize: 16),
+              dropdownSearchDecoration: InputDecoration(labelText: 'ФИО'),
+            ),
+            itemAsString: (Person u) => '${u.serviceNumber} ${u.fullName}',
+            onChanged: (Person? person) {
+              //FocusScope.of(context).requestFocus(FocusNode());
 
-                if (person != null) {
-                  context.sendEvent<TableBloc>(TableEvent.selectPerson(person));
-                }
-                _focusNode.requestFocus();
-                if (kDebugMode) {
-                  print(person?.fullName);
-                }
-              },
-            );
-          },
-        ),
+              if (person != null) {
+                context.sendEvent<TableBloc>(TableEvent.selectPerson(person));
+              }
+              _focusNode.requestFocus();
+              if (kDebugMode) {
+                print(person?.fullName);
+              }
+            },
+          );
+        },
       ),
     );
   }
 
   Widget buildTable() {
     return BlocBuilder<TableBloc, TableState>(
-      buildWhen: (previous, current) => previous.sells != current.sells,
+      buildWhen: (previous, current) => previous.sells != current.sells || previous.loading != current.loading,
       builder: (context, state) {
+        if (state.loading == true) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state.sells.isEmpty) {
+          return const Center(
+            child: Text('Записей ещё нету'),
+          );
+        }
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18.0),
           child: Column(
@@ -294,6 +309,7 @@ class _TableScreenState extends State<TableScreen> {
           //  child: const Text('Заявление'),
           //),
           //const SizedBox(width: 20),
+          //MWWM
           ElevatedButton(
             onPressed: () {
               context.sendEvent<TableBloc>(const TableEvent.statementPressed());
@@ -337,10 +353,10 @@ class _TableScreenState extends State<TableScreen> {
     // set up the AlertDialog
     TextEditingController sumController = TextEditingController();
     sumController.text = state.sells[index].sum.toString();
-    Person? person;
+    Person? personSelected;
     for (var item in state.persons) {
-      if (item.fullName == state.sells[index].fullName) {
-        person = item;
+      if (item.fullName == state.sells[index].person.fullName) {
+        personSelected = item;
         break;
       }
     }
@@ -350,7 +366,7 @@ class _TableScreenState extends State<TableScreen> {
         mainAxisSize: MainAxisSize.max,
         children: [
           DropdownSearch<Person>(
-            selectedItem: person,
+            selectedItem: personSelected,
             popupProps: const PopupProps.menu(
               searchFieldProps: TextFieldProps(
                 autofocus: true,
@@ -367,7 +383,7 @@ class _TableScreenState extends State<TableScreen> {
               //FocusScope.of(context).requestFocus(FocusNode());
 
               if (person != null) {
-                person = person;
+                personSelected = person;
               }
               _focusNode2.requestFocus();
               if (kDebugMode) {
@@ -388,16 +404,21 @@ class _TableScreenState extends State<TableScreen> {
         TextButton(
           onPressed: () {
             Navigator.of(context).pop();
-            contextExternal.sendEvent<TableBloc>(
-              TableEvent.editRowDone(
-                Sell(
-                  fullName: person!.fullName,
-                  sum: double.parse(sumController.text),
-                  date: state.sells[index].date,
+            if (personSelected != null) {
+              contextExternal.sendEvent<TableBloc>(
+                TableEvent.editRowDone(
+                  Sell(
+                    id: state.sells[index].id,
+                    idSell: state.sells[index].idSell,
+                    person: personSelected!,
+                    sum: double.parse(sumController.text),
+                    dateSell: state.sells[index].dateSell,
+                  ),
+                  index,
+                  personSelected!,
                 ),
-                index,
-              ),
-            );
+              );
+            }
           },
           child: const Text('Внести изменения'),
         ),

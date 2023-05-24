@@ -4,75 +4,48 @@
 
 import 'dart:convert';
 
-Map<String, dynamic> testData = {
-  "persons": [
-    {
-      "fullname": "Василий Головикин Юрьевич",
-      "summ": 1250.5,
-      "date": "2000-01-23T01:23:45.678+09:00",
-    },
-    {
-      "fullname": "Василий Головикин Юрьевич",
-      "summ": 10.5,
-      "date": "2000-01-23T01:23:45.678+09:00",
-    },
-    {
-      "fullname": "Василий Головикин Юрьевич",
-      "summ": 250.6,
-      "date": "2000-01-23T01:23:45.678+09:00",
-    },
-    {
-      "fullname": "Михаил Юрьевич Лопатин",
-      "summ": 250.5,
-      "date": "2000-01-23T01:23:45.678+09:00",
-    },
-  ]
-};
-
-class Sells {
-  Sells({
-    required this.sells,
-  });
-
-  final List<Sell> sells;
-
-  factory Sells.fromRawJson(String str) => Sells.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory Sells.fromJson(Map<String, dynamic> json) => Sells(
-        sells: List<Sell>.from(json["persons"].map((x) => Sell.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "persons": List<dynamic>.from(sells.map((x) => x.toJson())),
-      };
-}
+import 'package:first_may/model/person.dart';
 
 class Sell {
-  Sell({
-    required this.fullName,
-    required this.sum,
-    required this.date,
-  });
-
-  final String fullName;
+  final int? id;
+  final int? idSell;
   final double sum;
-  final DateTime date;
+  final DateTime dateSell;
+  final bool? isPrimary;
+  final int? primarySellId;
+  final Person person;
+
+  Sell({
+    this.id,
+    this.idSell,
+    required this.sum,
+    required this.dateSell,
+    this.isPrimary,
+    this.primarySellId,
+    required this.person,
+  });
 
   factory Sell.fromRawJson(String str) => Sell.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
   factory Sell.fromJson(Map<String, dynamic> json) => Sell(
-        fullName: json["fullname"],
-        sum: json["summ"]?.toDouble(),
-        date: DateTime.parse(json["date"]),
+        id: json["id"],
+        idSell: json["idSell"],
+        sum: json["sum"],
+        dateSell: DateTime.parse(json["dateSell"]),
+        isPrimary: json["isPrimary"],
+        primarySellId: json["primarySellId"],
+        person: Person.fromJson(json["person"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "fullname": fullName,
-        "summ": sum,
-        "date": date.toIso8601String(),
+        "id": id,
+        "idSell": idSell,
+        "sum": sum,
+        "dateSell": dateSell.toIso8601String(),
+        "isPrimary": isPrimary,
+        "primarySellId": primarySellId,
+        "person": person.toJson(),
       };
 }

@@ -51,9 +51,9 @@ class DataTableWidget extends StatelessWidget {
                   ? MaterialStateProperty.all<Color>(Colors.grey.withOpacity(0.1))
                   : MaterialStateProperty.all<Color>(Colors.yellow.withOpacity(0.4)),
               cells: [
-                DataCell(Text('${peopleReversed.length - index}. ${peopleReversed[index].fullName}')),
+                DataCell(Text('${peopleReversed.length - index}. ${peopleReversed[index].person.fullName}')),
                 DataCell(Text('${peopleReversed[index].sum} P')),
-                DataCell(Text(Jiffy(peopleReversed[index].date).format('HH:mm dd.MM'))),
+                DataCell(Text(Jiffy(peopleReversed[index].dateSell).format('HH:mm dd.MM'))),
               ],
             ),
           ),

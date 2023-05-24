@@ -5,7 +5,7 @@ import 'package:first_may/model/sells.dart';
 import 'package:path/path.dart';
 
 class ExcelHelper {
-  static void createExcelFromSells({required Sells sells, String? path}) {
+  static void createExcelFromSells({required List<Sell> sells, String? path}) {
     var excel = Excel.createExcel();
 
     var colIterableSheet = excel['Sheet1'];
@@ -23,13 +23,13 @@ class ExcelHelper {
           .value = rowValue;
     }
 
-    for (var colValue in sells.sells) {
+    for (var colValue in sells) {
       colIterableSheet
           .cell(CellIndex.indexByColumnRow(
             rowIndex: colIterableSheet.maxRows,
             columnIndex: colIndex,
           ))
-          .value = colValue.fullName;
+          .value = colValue.person.fullName;
       colIterableSheet
           .cell(CellIndex.indexByColumnRow(
             rowIndex: colIterableSheet.maxRows - 1,
@@ -41,7 +41,7 @@ class ExcelHelper {
             rowIndex: colIterableSheet.maxRows - 1,
             columnIndex: colIndex + 2,
           ))
-          .value = colValue.date.toIso8601String();
+          .value = colValue.dateSell.toIso8601String();
     }
 
     String outputFile = path ?? "/xls/r.xlsx";
