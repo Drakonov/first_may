@@ -5,6 +5,7 @@ import 'package:first_may/di/app_locator.dart';
 import 'package:first_may/model/person.dart';
 import 'package:first_may/model/sells.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:jiffy/jiffy.dart';
 
 class RemoteRepository {
   static final Dio dio = Locator.injection();
@@ -33,16 +34,14 @@ class RemoteRepository {
   static Future<List<Sell>> getSells() async {
     List<Sell> list = [];
     try {
-      Response response = await dio.get(
-        '$basicPath/sells',
-      );
+      Response response = await dio.get('$basicPath/sells', data: {
+        "primaryOnly": "true",
+        "dateStart": Jiffy(DateTime.now()).add(duration: const Duration(days: -7)).dateTime.toIso8601String(),
+      });
       log(response.toString(), name: 'RemoteRepository.getSells');
 
       for (var item in response.data) {
-        Sell sell = Sell.fromJson(item);
-        if (sell.isPrimary == true) {
-          list.add(sell);
-        }
+        list.add(Sell.fromJson(item));
       }
     } catch (e, s) {
       log(e.toString(), name: 'RemoteRepository.getSells');

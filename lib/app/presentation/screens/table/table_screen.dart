@@ -141,7 +141,7 @@ class _TableScreenState extends State<TableScreen> {
                 TableEvent.addNew(
                   Sell(
                     person: state.selectedPerson!,
-                    sum: double.parse(_summController.text),
+                    sum: double.parse(_summController.text.replaceAll(',', '.').replaceAll('-', '')),
                     dateSell: DateTime.now(),
                   ),
                 ),
@@ -163,14 +163,14 @@ class _TableScreenState extends State<TableScreen> {
             focusNode: _focusNode,
             autofocus: false,
             controller: _summController,
-            inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*\.?\d{0,2})'))],
+            inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*[.,]?\d{0,2})'))],
             decoration: const InputDecoration(hintText: 'Сумма'),
             onEditingComplete: () {
               context.sendEvent<TableBloc>(
                 TableEvent.addNew(
                   Sell(
                     person: state.selectedPerson!,
-                    sum: double.parse(_summController.text),
+                    sum: double.parse(_summController.text.replaceAll(',', '.').replaceAll('-', '')),
                     dateSell: DateTime.now(),
                   ),
                 ),
@@ -395,7 +395,7 @@ class _TableScreenState extends State<TableScreen> {
             autofocus: false,
             focusNode: _focusNode2,
             controller: sumController,
-            inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*\.?\d{0,2})'))],
+            inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*[.,]?\d{0,2})'))],
             decoration: const InputDecoration(hintText: 'Сумма'),
           ),
         ],
@@ -411,7 +411,7 @@ class _TableScreenState extends State<TableScreen> {
                     id: state.sells[index].id,
                     idSell: state.sells[index].idSell,
                     person: personSelected!,
-                    sum: double.parse(sumController.text),
+                    sum: double.parse(sumController.text.replaceAll('-', '')),
                     dateSell: state.sells[index].dateSell,
                   ),
                   index,

@@ -65,7 +65,7 @@ class TableBloc extends Bloc<TableEvent, TableState> {
         win.minSize = initialSize;
         win.size = initialSize;
         if (state.positionWindowOnMinimize == null) {
-          win.position = Offset(win.position.dx > 1920 ? 2000 : 250, 120);
+          win.position = Offset(win.position.dx > 1920 ? 2000 : 600, 40);
         } else {
           win.position = state.positionWindowOnMinimize!;
         }

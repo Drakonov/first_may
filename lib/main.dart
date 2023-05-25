@@ -35,6 +35,7 @@ void main() async {
       const initialSize = Size(650, 500);
       win.minSize = initialSize;
       win.size = initialSize;
+      win.position = Offset(win.position.dx > 1920 ? 2000 : 600, 20);
       win.alignment = Alignment.center;
       win.title = "Custom window with Flutter";
       windowManager.ensureInitialized();
