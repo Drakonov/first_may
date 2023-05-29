@@ -42,12 +42,7 @@ class TableBloc extends Bloc<TableEvent, TableState> {
   ) async {
     emit(state.copyWith(loading: true));
     List<Sell> sells = [];
-    Set<String> persons = {};
     List<Person> personsList = [];
-
-    for (var item in state.persons) {
-      persons.add(item.fullName);
-    }
 
     personsList.addAll(await RemoteRepository.getPersons());
     sells.addAll(await RemoteRepository.getSells());
@@ -65,7 +60,7 @@ class TableBloc extends Bloc<TableEvent, TableState> {
         win.minSize = initialSize;
         win.size = initialSize;
         if (state.positionWindowOnMinimize == null) {
-          win.position = Offset(win.position.dx > 1920 ? 2000 : 600, 40);
+          win.position = Offset(win.position.dx > 1920 ? 2000 : 620, 30);
         } else {
           win.position = state.positionWindowOnMinimize!;
         }

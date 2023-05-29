@@ -81,18 +81,19 @@ class _TableScreenState extends State<TableScreen> {
       );
 
   Widget buildButtonSwitch(BuildContext context) {
-    return Container(
-      color: Colors.deepOrange.withOpacity(0.5),
-      child: Row(
-        children: [
-          Expanded(child: MoveWindow()),
-          Center(
-            child: GestureDetector(
-                onTap: () => context.sendEvent<TableBloc>(const TableEvent.switchCurrentStateWindow()),
-                child: const Icon(Icons.cached)),
-          ),
-          Expanded(child: MoveWindow()),
-        ],
+    return GestureDetector(
+      onTap: () => context.sendEvent<TableBloc>(const TableEvent.switchCurrentStateWindow()),
+      child: Container(
+        color: Colors.deepOrange.withOpacity(0.5),
+        child: Row(
+          children: const [
+            Expanded(
+              child: Center(
+                child: Icon(Icons.cached),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -274,7 +275,7 @@ class _TableScreenState extends State<TableScreen> {
         }
         if (state.sells.isEmpty) {
           return const Center(
-            child: Text('Записей ещё нету'),
+            child: Text('Записей ещё нет'),
           );
         }
         return Padding(

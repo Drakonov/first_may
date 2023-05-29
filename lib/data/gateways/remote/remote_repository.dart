@@ -22,7 +22,8 @@ class RemoteRepository {
       // log(response.toString(), name: 'RemoteRepository.getPersons');
 
       for (var item in response.data) {
-        list.add(Person.fromJson(item));
+        Person person = Person.fromJson(item);
+        list.add(person);
       }
     } catch (e, s) {
       log(e.toString(), name: 'RemoteRepository.getPersons');
