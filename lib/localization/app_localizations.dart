@@ -44,7 +44,7 @@ class AppLocalizations {
       );
     });
 
-    await Jiffy.locale(locale.languageCode);
+    await Jiffy.setLocale(locale.languageCode);
 
     return true;
   }

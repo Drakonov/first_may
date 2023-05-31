@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:bloc/bloc.dart';
@@ -26,6 +27,7 @@ class TableBloc extends Bloc<TableEvent, TableState> {
     on<_AddNew>(_addNew);
     on<_SwitchCurrentStateWindow>(_switchCurrentStateWindow);
     on<_StatementPressed>(_statementPressed);
+    on<_ClosePressed>(_closePressed);
     on<_OnEnterPressed>(_onEnterPressed);
     on<_OnLongPressRow>(_onLongPressRow);
     on<_EditRowDone>(_onEditRowDone);
@@ -115,5 +117,9 @@ class TableBloc extends Bloc<TableEvent, TableState> {
     } catch (e) {}
 
     emit(state.copyWith(sells: sells, selectedPerson: null, loading: false));
+  }
+
+  FutureOr<void> _closePressed(_ClosePressed event, Emitter<TableState> emit) {
+    exit(0);
   }
 }

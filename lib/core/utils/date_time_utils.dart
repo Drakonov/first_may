@@ -58,8 +58,8 @@ String formatDate(DateTime? date) {
   if (date == null) {
     return '';
   }
-  Jiffy day = Jiffy(date.toLocal());
-  Jiffy today = Jiffy(DateTime.now().toLocal());
+  Jiffy day = Jiffy.parseFromDateTime(date.toLocal());
+  Jiffy today = Jiffy.parseFromDateTime(DateTime.now().toLocal());
 
   if (day.yMd == today.yMd) {
     return 'Сегодня в ${day.Hm}';

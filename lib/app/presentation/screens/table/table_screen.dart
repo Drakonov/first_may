@@ -66,7 +66,7 @@ class _TableScreenState extends State<TableScreen> {
                               child: buildTable(),
                             ),
                             const SizedBox(height: 20),
-                            //buildBottomButtons(context)
+                            buildBottomButtons(context)
                           ],
                         );
                       case CurrentStateWindow.minimize:
@@ -85,8 +85,8 @@ class _TableScreenState extends State<TableScreen> {
       onTap: () => context.sendEvent<TableBloc>(const TableEvent.switchCurrentStateWindow()),
       child: Container(
         color: Colors.deepOrange.withOpacity(0.5),
-        child: Row(
-          children: const [
+        child: const Row(
+          children: [
             Expanded(
               child: Center(
                 child: Icon(Icons.cached),
@@ -314,9 +314,9 @@ class _TableScreenState extends State<TableScreen> {
           //MWWM
           ElevatedButton(
             onPressed: () {
-              context.sendEvent<TableBloc>(const TableEvent.statementPressed());
+              context.sendEvent<TableBloc>(const TableEvent.closePressed());
             },
-            child: const Text('Ведомость'),
+            child: const Text('Закрыть'),
           ),
           //const SizedBox(width: 20),
           //ElevatedButton(

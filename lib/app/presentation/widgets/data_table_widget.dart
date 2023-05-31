@@ -61,13 +61,13 @@ class DataTableWidget extends StatelessWidget {
     //Создаем мапу, заполняем её ключами с пулом дат
     Map<String, List<Sell>> map = {};
     for (var item in peopleReversed) {
-      map[Jiffy(item.dateSell).yMd] = [];
+      map[Jiffy.parseFromDateTime(item.dateSell).yMd] = [];
     }
     //Заполняем мапу списками продаж по дням
     for (var item in peopleReversed) {
-      List<Sell> items = map[Jiffy(item.dateSell).yMd]!;
+      List<Sell> items = map[Jiffy.parseFromDateTime(item.dateSell).yMd]!;
       items.add(item);
-      map.update(Jiffy(item.dateSell).yMd, (value) => items);
+      map.update(Jiffy.parseFromDateTime(item.dateSell).yMd, (value) => items);
     }
     print(map);
     //По каждому ключу(дате), получаем сумму элементов списка за день
@@ -90,13 +90,13 @@ class DataTableWidget extends StatelessWidget {
     Sell? sell;
     int count = 0;
     for (var item in peopleReversed.reversed) {
-      if (sell != null && Jiffy(item.dateSell).yMd != Jiffy(sell.dateSell).yMd) {
+      if (sell != null && Jiffy.parseFromDateTime(item.dateSell).yMd != Jiffy.parseFromDateTime(sell.dateSell).yMd) {
         sell = null;
       }
       count++;
-      if (addedRows[Jiffy(item.dateSell).yMd] != null && sell == null) {
+      if (addedRows[Jiffy.parseFromDateTime(item.dateSell).yMd] != null && sell == null) {
         sell = item;
-        listRows.insert(peopleReversed.length - count + 1, addedRows[Jiffy(item.dateSell).yMd]!);
+        listRows.insert(peopleReversed.length - count + 1, addedRows[Jiffy.parseFromDateTime(item.dateSell).yMd]!);
       }
     }
     print(listRows.length);
@@ -115,7 +115,7 @@ class DataTableWidget extends StatelessWidget {
       cells: [
         DataCell(Text('${peopleReversed.length - index}. ${peopleReversed[index].person.fullName}')),
         DataCell(Text('${peopleReversed[index].sum} P')),
-        DataCell(Text(Jiffy(peopleReversed[index].dateSell).format('HH:mm dd.MM'))),
+        DataCell(Text(Jiffy.parseFromDateTime(peopleReversed[index].dateSell).format(pattern: 'HH:mm dd.MM'))),
       ],
     );
   }

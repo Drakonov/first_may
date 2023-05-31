@@ -37,7 +37,7 @@ class RemoteRepository {
     try {
       Response response = await dio.get('$basicPath/sells', data: {
         "primaryOnly": "true",
-        "dateStart": Jiffy(DateTime.now()).add(duration: const Duration(days: -7)).dateTime.toIso8601String(),
+        "dateStart": Jiffy.parseFromDateTime(DateTime.now()).add(days: -7).dateTime.toIso8601String(),
       });
       log(response.toString(), name: 'RemoteRepository.getSells');
 

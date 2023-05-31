@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
-
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:first_may/app/app.dart';
 import 'package:first_may/app/bloc/app_bloc.dart';
 import 'package:first_may/di/app_locator.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() async {
@@ -30,14 +30,16 @@ void main() async {
         ),
       ),
     );
-    doWhenWindowReady(() {
+    doWhenWindowReady(() async {
+      PackageInfo packageInfo = await PackageInfo.fromPlatform();
       final win = appWindow;
       const initialSize = Size(650, 500);
       win.minSize = initialSize;
       win.size = initialSize;
       win.position = Offset(win.position.dx > 1920 ? 2000 : 600, 20);
       win.alignment = Alignment.center;
-      win.title = "Custom window with Flutter";
+      String version = packageInfo.version;
+      win.title = "First May Dining App v$version";
       windowManager.ensureInitialized();
       WindowOptions windowOptions = const WindowOptions(alwaysOnTop: true);
       windowManager.waitUntilReadyToShow(windowOptions, () async {});
@@ -56,4 +58,3 @@ class MyHttpOverrides extends HttpOverrides {
       ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }
-
