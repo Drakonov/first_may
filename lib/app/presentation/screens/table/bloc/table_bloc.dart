@@ -14,9 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'table_bloc.freezed.dart';
-
 part 'table_event.dart';
-
 part 'table_state.dart';
 
 class TableBloc extends Bloc<TableEvent, TableState> {
@@ -90,7 +88,7 @@ class TableBloc extends Bloc<TableEvent, TableState> {
     List<Sell> sells = [];
     sells.addAll(await RemoteRepository.getSells());
     emit(state.copyWith(sells: sells, selectedPerson: null, loading: false));
-    add(const TableEvent.switchCurrentStateWindow());
+    //add(const TableEvent.switchCurrentStateWindow());
   }
 
   Future<FutureOr<void>> _statementPressed(_StatementPressed event, Emitter<TableState> emit) async {

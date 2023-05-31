@@ -103,6 +103,7 @@ class _TableScreenState extends State<TableScreen> {
       children: [
         WindowsButtons(
           onTapMinimize: () => context.sendEvent<TableBloc>(const TableEvent.switchCurrentStateWindow()),
+          onTapClose: () => context.sendEvent<TableBloc>(const TableEvent.switchCurrentStateWindow()),
         ),
       ],
     );
