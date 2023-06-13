@@ -1,6 +1,6 @@
+import 'package:first_may/app/bloc/app_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:first_may/app/bloc/app_bloc.dart';
 
 class ScreenWrapper extends StatelessWidget {
   const ScreenWrapper({
@@ -13,6 +13,7 @@ class ScreenWrapper extends StatelessWidget {
     this.floatingButton,
     this.floatingButtonLocation,
     super.key,
+    this.appBar,
   });
 
   final Color? backgroundColor;
@@ -23,6 +24,7 @@ class ScreenWrapper extends StatelessWidget {
   final bool safeAreaRight;
   final Widget? floatingButton;
   final FloatingActionButtonLocation? floatingButtonLocation;
+  final PreferredSizeWidget? appBar;
 
   @override
   Widget build(BuildContext context) => BlocBuilder<AppBloc, AppState>(
@@ -31,6 +33,7 @@ class ScreenWrapper extends StatelessWidget {
           floatingActionButton: floatingButton,
           floatingActionButtonLocation: floatingButtonLocation,
           backgroundColor: backgroundColor,
+          appBar: appBar,
           body: SafeArea(
             top: !state.learningMode && safeAreaTop,
             bottom: safeAreaBottom,

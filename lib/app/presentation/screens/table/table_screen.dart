@@ -306,12 +306,13 @@ class _TableScreenState extends State<TableScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          //ElevatedButton(
-          //  onPressed: () {},
-          //  child: const Text('Заявление'),
-          //),
-          //const SizedBox(width: 20),
-          //MWWM
+          ElevatedButton(
+            onPressed: () {
+              context.sendEvent<TableBloc>(const TableEvent.statementPressed());
+            },
+            child: const Text('Итоги'),
+          ),
+          const SizedBox(width: 20),
           ElevatedButton(
             onPressed: () {
               context.sendEvent<TableBloc>(const TableEvent.closePressed());
@@ -363,10 +364,27 @@ class _TableScreenState extends State<TableScreen> {
       }
     }
     AlertDialog alert = AlertDialog(
-      title: const Text('Изменение данных по продаже'),
       content: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Center(
+                  child: Text(
+                'Изменение данных по продаже',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              )),
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(Icons.close),
+              )
+            ],
+          ),
+          const SizedBox(height: 40),
           DropdownSearch<Person>(
             selectedItem: personSelected,
             popupProps: const PopupProps.menu(

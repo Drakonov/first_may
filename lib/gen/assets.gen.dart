@@ -355,7 +355,8 @@ class Assets {
       AssetGenImage('assets/chat-bg-dark.jpg');
   static const AssetGenImage chatBg = AssetGenImage('assets/chat-bg.png');
   static const $AssetsI18nGen i18n = $AssetsI18nGen();
-  static const AssetGenImage icon = AssetGenImage('assets/icon.png');
+  static const AssetGenImage iconJpg = AssetGenImage('assets/icon.jpg');
+  static const AssetGenImage iconPng = AssetGenImage('assets/icon.png');
   static const AssetGenImage iconBackground =
       AssetGenImage('assets/icon_background.png');
   static const AssetGenImage iconForeground =
@@ -385,7 +386,8 @@ class Assets {
   List<dynamic> get values => [
         chatBgDark,
         chatBg,
-        icon,
+        iconJpg,
+        iconPng,
         iconBackground,
         iconForeground,
         logo,
@@ -467,7 +469,16 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider() => AssetImage(_assetName);
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
 
   String get path => _assetName;
 

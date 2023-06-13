@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:bloc/bloc.dart';
 import 'package:first_may/app/navigation/app_router.dart';
+import 'package:first_may/app/navigation/app_router.gr.dart';
 import 'package:first_may/core/bloc/base_bloc_state.dart';
 import 'package:first_may/core/bloc/bloc_action.dart';
 import 'package:first_may/core/utils/excel/myExcel.dart';
@@ -15,7 +16,9 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'table_bloc.freezed.dart';
+
 part 'table_event.dart';
+
 part 'table_state.dart';
 
 class TableBloc extends Bloc<TableEvent, TableState> {
@@ -94,10 +97,11 @@ class TableBloc extends Bloc<TableEvent, TableState> {
   }
 
   Future<FutureOr<void>> _statementPressed(_StatementPressed event, Emitter<TableState> emit) async {
-    String path = "/xls/r.xlsx";
-    ExcelHelper.createExcelFromSells(sells: state.sells, path: path);
-    print('file create');
-    emit(state.copyWith(action: ShowStatementDone()));
+    //String path = "/xls/r.xlsx";
+    //ExcelHelper.createExcelFromSells(sells: state.sells, path: path);
+    //print('file create');
+    //emit(state.copyWith(action: ShowStatementDone()));
+    _appRouter.push(TotalsScreen(sells: state.sells));
   }
 
   FutureOr<void> _onEnterPressed(_OnEnterPressed event, Emitter<TableState> emit) {
